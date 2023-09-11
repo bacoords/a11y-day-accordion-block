@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "a11y-day/accordion-inner-block",
+	"version": "0.1.0",
+	"title": "Accordion Inner Block",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Example block scaffolded with Create Block tool.",
+	"example": {},
+	"parent": ["a11y-day/accordion-block"],
+	"supports": {
+		"html": false
+	},
+	"textdomain": "accordion-block",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}
