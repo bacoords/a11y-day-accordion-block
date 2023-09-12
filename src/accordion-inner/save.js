@@ -25,9 +25,8 @@ export default function save( { attributes } ) {
 					className="accordion-trigger"
 					aria-controls={ `${ attributes.id }-content` }
 					id={ `${ attributes.id }-heading` }
-				>
-					{ attributes.heading }
-				</button>
+					dangerouslySetInnerHTML={ { __html: attributes.heading } }
+				></button>
 			</h3>
 			<div
 				id={ `${ attributes.id }-content` }
@@ -35,7 +34,10 @@ export default function save( { attributes } ) {
 				aria-labelledby={ `${ attributes.id }-heading` }
 				className="accordion-panel"
 			>
-				<div className="accordion-content">{ attributes.content }</div>
+				<div
+					className="accordion-content"
+					dangerouslySetInnerHTML={ { __html: attributes.content } }
+				></div>
 			</div>
 		</div>
 	);

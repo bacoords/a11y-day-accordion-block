@@ -202,15 +202,21 @@ function save({
     "aria-expanded": "false",
     className: "accordion-trigger",
     "aria-controls": `${attributes.id}-content`,
-    id: `${attributes.id}-heading`
-  }, attributes.heading)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    id: `${attributes.id}-heading`,
+    dangerouslySetInnerHTML: {
+      __html: attributes.heading
+    }
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: `${attributes.id}-content`,
     role: "region",
     "aria-labelledby": `${attributes.id}-heading`,
     className: "accordion-panel"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "accordion-content"
-  }, attributes.content)));
+    className: "accordion-content",
+    dangerouslySetInnerHTML: {
+      __html: attributes.content
+    }
+  })));
 }
 
 /***/ }),
