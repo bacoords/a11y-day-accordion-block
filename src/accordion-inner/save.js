@@ -15,10 +15,28 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {WPElement} Element to render.
  */
-export default function save() {
+export default function save( { attributes } ) {
 	return (
-		<p { ...useBlockProps.save() }>
-			{ 'Accordion Block – hello from the saved content!' }
-		</p>
+		<div { ...useBlockProps.save() }>
+			<h3 className="accordion-heading">
+				<button
+					type="button"
+					aria-expanded="false"
+					className="accordion-trigger"
+					aria-controls={ `${ attributes.id }-content` }
+					id={ `${ attributes.id }-heading` }
+				>
+					{ attributes.heading }
+				</button>
+			</h3>
+			<div
+				id={ `${ attributes.id }-content` }
+				role="region"
+				aria-labelledby={ `${ attributes.id }-heading` }
+				className="accordion-panel"
+			>
+				<div className="accordion-content">{ attributes.content }</div>
+			</div>
+		</div>
 	);
 }

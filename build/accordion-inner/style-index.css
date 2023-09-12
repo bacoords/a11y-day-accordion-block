@@ -7,10 +7,17 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-a11y-day-accordion-block {
-  background-color: #21759b;
-  color: #fff;
-  padding: 2px;
+.wp-block-a11y-day-accordion-inner-block button {
+  all: unset;
+  display: block;
+  width: 100%;
+}
+.wp-block-a11y-day-accordion-inner-block .accordion-panel {
+  display: none;
+  transition: opacity 0.3s ease-in;
+}
+.wp-block-a11y-day-accordion-inner-block.is-selected .accordion-panel {
+  display: block;
 }
 
 /*# sourceMappingURL=style-index.css.map*/

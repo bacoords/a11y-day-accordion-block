@@ -5,12 +5,26 @@
 	"version": "0.1.0",
 	"title": "Accordion Inner Block",
 	"category": "widgets",
-	"icon": "smiley",
+	"icon": "arrow-right",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"parent": ["a11y-day/accordion-block"],
 	"supports": {
 		"html": false
+	},
+	"attributes": {
+		"content": {
+			"type": "string",
+			"selector": "accordion-content"
+		},
+		"heading": {
+			"type": "string",
+			"selector": "accordion-heading"
+		},
+		"id": {
+			"type": "string",
+			"default": ""
+		}
 	},
 	"textdomain": "accordion-block",
 	"editorScript": "file:./index.js",

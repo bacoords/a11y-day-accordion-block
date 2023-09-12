@@ -54,8 +54,8 @@ __webpack_require__.r(__webpack_exports__);
 function Edit() {
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useInnerBlocksProps)(blockProps, {
-    allowedBlocks: ["a11y-day/accordion-inner-block"],
-    template: [["a11y-day/accordion-inner-block"]]
+    allowedBlocks: ['a11y-day/accordion-inner-block'],
+    template: [['a11y-day/accordion-inner-block']]
   });
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...innerBlocksProps
@@ -228,7 +228,7 @@ module.exports = window["wp"]["i18n"];
   \****************************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"a11y-day/accordion-block","version":"0.1.0","title":"Accordion","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false},"textdomain":"accordion-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"a11y-day/accordion-block","version":"0.1.0","title":"Accordion","category":"widgets","icon":"sort","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false},"textdomain":"accordion-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 
@@ -387,7 +387,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkaccordion_block"] = self["webpackChunkaccordion_block"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunka11y_day_accordion_block"] = self["webpackChunka11y_day_accordion_block"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	}();

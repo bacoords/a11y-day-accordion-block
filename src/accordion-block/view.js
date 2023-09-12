@@ -1,21 +1,59 @@
-/**
- * Use this file for JavaScript code that you want to run in the front-end
- * on posts/pages that contain this block.
- *
- * When this file is defined as the value of the `viewScript` property
- * in `block.json` it will be enqueued on the front end of the site.
- *
- * Example:
- *
- * ```js
- * {
- *   "viewScript": "file:./view.js"
- * }
- * ```
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#view-script
- */
+const accordions = document.querySelectorAll(
+	'.wp-block-a11y-day-accordion-inner-block'
+);
+// Add event listeners to all accordions and toggle them on click
+accordions.forEach( ( accordion ) => {
+	const { accordionHeader, accordionContent } = accordionParts( accordion );
+	accordionHeader.addEventListener( 'click', () =>
+		toggleAccordionItem( accordionHeader, accordionContent, accordion )
+	);
+} );
 
-/* eslint-disable no-console */
-console.log( 'Hello World! (from a11y-day-accordion-block block)' );
-/* eslint-enable no-console */
+/**
+ * Toggle the accordion item
+ * @param {HTMLElement} accordionHeader the button that controls the accordion
+ * @param {HTMLElement} panel the panel that is controlled by the accordion
+ * @param {HTMLElement} accordion the accordion item
+ */
+function toggleAccordionItem( accordionHeader, panel, accordion ) {
+	isAccordionOpen =
+		accordionHeader.getAttribute( 'aria-expanded' ) === 'true';
+	if ( ! isAccordionOpen ) {
+		// Hide every panel but the one we want to show
+		accordions.forEach( ( accordion ) => {
+			const { accordionHeader, accordionContent } =
+				accordionParts( accordion );
+			if ( accordionContent !== panel ) {
+				toggleIsSelected( accordion, 'remove' );
+				accordionHeader.setAttribute( 'aria-expanded', 'false' );
+			}
+		} );
+	}
+	toggleIsSelected( accordion, 'toggle' );
+	accordionHeader.setAttribute( 'aria-expanded', ! isAccordionOpen );
+}
+
+/**
+ * Get the header and content elements of an accordion item
+ * @param {HTMLElement} accordion An accordion item
+ * @returns an object containing the accordion header and content element
+ */
+function accordionParts( accordion ) {
+	const accordionHeader = accordion.querySelector( 'button[aria-expanded]' );
+	const controlsId = accordionHeader.getAttribute( 'aria-controls' );
+	const accordionContent = document.getElementById( controlsId );
+	return { accordionHeader, accordionContent };
+}
+
+/**
+ * Add or remove the is-selected class from an Element
+ * @param {HTMLELEMENT} element the element to add or remove the class from
+ * @param {string} type accepts "toggle" or "remove"
+ */
+function toggleIsSelected( element, type ) {
+	if ( 'toggle' === type ) {
+		element.classList.toggle( 'is-selected' );
+	} else {
+		element.classList.remove( 'is-selected' );
+	}
+}

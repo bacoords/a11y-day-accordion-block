@@ -35,6 +35,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -51,10 +52,54 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @return {WPElement} Element to render.
  */
-function Edit() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+function Edit({
+  attributes,
+  setAttributes,
+  clientId
+}) {
+  // Get the heading text and set up a local state for it
+  const [heading, setHeading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.heading);
+  // Get the content text and set up a local state for it
+  const [content, setContent] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.content);
+  const updateHeading = value => {
+    setAttributes({
+      heading: value
+    });
+    setHeading(value);
+  };
+  const updateContent = value => {
+    setAttributes({
+      content: value
+    });
+    setContent(value);
+  };
+
+  // This is a hook that is used to set the block's clientId as an attribute.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    setAttributes({
+      id: clientId
+    });
+  }, [clientId]);
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)()
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Accordion Block – hello from the editor!', 'accordion-block'));
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+    value: heading,
+    onChange: updateHeading,
+    tagName: "h3",
+    placeholder: "Enter heading here...",
+    className: "accordion-heading"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    id: "sect1",
+    role: "region",
+    "aria-labelledby": "accordion1id",
+    className: "accordion-panel"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+    value: content,
+    onChange: updateContent,
+    tagName: "div",
+    placeholder: "Enter content here...",
+    className: "accordion-content"
+  })));
 }
 
 /***/ }),
@@ -145,10 +190,27 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @return {WPElement} Element to render.
  */
-function save() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+function save({
+  attributes
+}) {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save()
-  }, 'Accordion Block – hello from the saved content!');
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
+    className: "accordion-heading"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    type: "button",
+    "aria-expanded": "false",
+    className: "accordion-trigger",
+    "aria-controls": `${attributes.id}-content`,
+    id: `${attributes.id}-heading`
+  }, attributes.heading)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    id: `${attributes.id}-content`,
+    role: "region",
+    "aria-labelledby": `${attributes.id}-heading`,
+    className: "accordion-panel"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "accordion-content"
+  }, attributes.content)));
 }
 
 /***/ }),
@@ -223,7 +285,7 @@ module.exports = window["wp"]["i18n"];
   \****************************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"a11y-day/accordion-inner-block","version":"0.1.0","title":"Accordion Inner Block","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"parent":["a11y-day/accordion-block"],"supports":{"html":false},"textdomain":"accordion-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"a11y-day/accordion-inner-block","version":"0.1.0","title":"Accordion Inner Block","category":"widgets","icon":"arrow-right","description":"Example block scaffolded with Create Block tool.","example":{},"parent":["a11y-day/accordion-block"],"supports":{"html":false},"attributes":{"content":{"type":"string","selector":"accordion-content"},"heading":{"type":"string","selector":"accordion-heading"},"id":{"type":"string","default":""}},"textdomain":"accordion-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 
@@ -382,7 +444,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkaccordion_block"] = self["webpackChunkaccordion_block"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunka11y_day_accordion_block"] = self["webpackChunka11y_day_accordion_block"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	}();
