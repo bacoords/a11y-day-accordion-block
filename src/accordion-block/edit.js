@@ -34,6 +34,7 @@ export default function Edit() {
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		allowedBlocks: [ 'a11y-day/accordion-inner-block' ],
 		template: [ [ 'a11y-day/accordion-inner-block' ] ],
+		templateInsertUpdatesSelection: true,
 	} );
 	return <div { ...innerBlocksProps }></div>;
 }
