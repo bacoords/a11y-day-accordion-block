@@ -15,8 +15,9 @@
 		"start": "wp-scripts start",
 		"env": "wp-env"
 	},
-	"devDependencies": {
+	"dependencies": {
 		"@wordpress/env": "^8.7.0",
-		"@wordpress/scripts": "^26.12.0"
+		"@wordpress/scripts": "^26.12.0",
+		"reveal.js": "^4.6.0"
 	}
 }
