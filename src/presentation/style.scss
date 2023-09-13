@@ -17,11 +17,14 @@
 }
 
 :root {
+	--foreground: #000;
 	--highlight: #a1c69f;
+	--secondary: #daa6ba;
+	--light: #e7e7e8;
 	--r-background-color: #f7f5f7;
-	--r-main-font: Lexend, sans-serif;
-	// --r-main-font-size: #{$mainFontSize};
-	--r-main-color: #000;
+	--r-main-font: "Lexend", sans-serif;
+	--r-main-font-size: clamp(1.20rem, calc(1.07rem + 0.63vw), 1.56rem);
+	--r-main-color: var(--foreground);
 	// --r-block-margin: #{$blockMargin};
 	// --r-heading-margin: #{$headingMargin};
 	--r-heading-font: "DM Serif Display", serif;
@@ -32,20 +35,48 @@
 	// --r-heading-text-shadow: #{$headingTextShadow};
 	// --r-heading-font-weight: #{$headingFontWeight};
 	// --r-heading1-text-shadow: #{$heading1TextShadow};
-	// --r-heading1-size: #{$heading1Size};
-	// --r-heading2-size: #{$heading2Size};
-	// --r-heading3-size: #{$heading3Size};
-	// --r-heading4-size: #{$heading4Size};
+	--r-heading1-size: clamp(2.49rem, calc(2.03rem + 2.31vw), 3.82rem);
+	--r-heading2-size: clamp(2.07rem, calc(1.73rem + 1.70vw), 3.05rem);
+	--r-heading3-size: clamp(1.73rem, calc(1.48rem + 1.24vw), 2.44rem);
+	--r-heading4-size: clamp(1.44rem, calc(1.26rem + 0.89vw), 1.95rem);
+	--small-size: clamp(0.83rem, calc(0.78rem + 0.29vw), 1.00rem);
 	// --r-code-font: #{$codeFont};
-	// --r-link-color: #{$linkColor};
+	--r-link-color: var(--foreground);
 	// --r-link-color-dark: #{darken($linkColor , 15% )};
-	// --r-link-color-hover: #{$linkColorHover};
-	--r-selection-background-color: var(--highlight);
-	--r-selection-color: #000;
+	--r-link-color-hover: var(--foreground);
+	--r-selection-background-color: var(--secondary);
+	--r-selection-color: var(--foreground);
 }
 
 .reveal {
+	a {
+		border-bottom: 2px solid var(--highlight);
+		transition: 0.5s ease all;
+		&:hover {
+			border-bottom: 2px solid var(--foreground);
+		}
+	}
 	.feature-slide {
 		background-color: var(--highlight);
 	}
+	.title-slide {
+		text-align: left;
+		.colophon {
+			img { max-width: 100px}
+		}
+	}
+	.authors {
+		margin-top: 5rem;
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+		font-size: var(--small-size);
+		img {
+			max-width: 150px;
+		}
+		& > * {
+			margin: 0;
+		}
+	}
+
 }
