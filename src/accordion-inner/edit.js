@@ -58,6 +58,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				tagName="h3"
 				placeholder="Enter heading here..."
 				className="accordion-heading"
+				tabindex="0"
 			/>
 			<div
 				id="sect1"
