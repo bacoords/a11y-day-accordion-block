@@ -1,1 +1,1 @@
-:root{--r-background-color:#f7f5f7}
+@font-face{font-family:Lexend;font-style:normal;font-weight:400;src:url(../fonts/lexend-regular.d7da848a.woff2)}@font-face{font-family:"DM Serif Display";font-style:normal;font-weight:400;src:url(../fonts/dmserifdisplay-regular-webfont.b8b1eeb1.woff2)}:root{--r-background-color:#f7f5f7;--r-main-font:Lexend,sans-serif;--r-heading-font:"DM Serif Display",serif}
