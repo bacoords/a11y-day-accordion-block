@@ -2,25 +2,26 @@
 
 // register font from font folder called lexend
 @font-face {
-	font-family: 'Lexend';
-	src: url('fonts/lexend-regular.woff2');
+	font-family: "Lexend";
+	src: url("fonts/lexend-regular.woff2");
 	font-weight: normal;
 	font-style: normal;
 }
 
 // register font from font folder dmserifdisplay-regular-webfont.woff2
 @font-face {
-	font-family: 'DM Serif Display';
-	src: url('fonts/dmserifdisplay-regular-webfont.woff2');
+	font-family: "DM Serif Display";
+	src: url("fonts/dmserifdisplay-regular-webfont.woff2");
 	font-weight: normal;
 	font-style: normal;
 }
 
 :root {
+	--highlight: #a1c69f;
 	--r-background-color: #f7f5f7;
 	--r-main-font: Lexend, sans-serif;
 	// --r-main-font-size: #{$mainFontSize};
-	// --r-main-color: #{$mainColor};
+	--r-main-color: #000;
 	// --r-block-margin: #{$blockMargin};
 	// --r-heading-margin: #{$headingMargin};
 	--r-heading-font: "DM Serif Display", serif;
@@ -39,6 +40,12 @@
 	// --r-link-color: #{$linkColor};
 	// --r-link-color-dark: #{darken($linkColor , 15% )};
 	// --r-link-color-hover: #{$linkColorHover};
-	// --r-selection-background-color: #{$selectionBackgroundColor};
-	// --r-selection-color: #{$selectionColor};
-  }
+	--r-selection-background-color: var(--highlight);
+	--r-selection-color: #000;
+}
+
+.reveal {
+	.feature-slide {
+		background-color: var(--highlight);
+	}
+}
