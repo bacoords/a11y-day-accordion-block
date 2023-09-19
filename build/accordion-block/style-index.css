@@ -7,14 +7,8 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-a11y-day-accordion-block {
-  border: 1px solid var(--wp--preset--color--contrast);
-}
-.wp-block-a11y-day-accordion-block > * + * {
-  border-top: 1px solid var(--wp--preset--color--contrast);
-}
 .wp-block-a11y-day-accordion-block > * + * .wp-block-a11y-day-accordion-heading {
-  border-top: 1px solid var(--wp--preset--color--base);
+  margin-top: var(--wp--style--block-gap);
 }
 
 /*# sourceMappingURL=style-index.css.map*/
