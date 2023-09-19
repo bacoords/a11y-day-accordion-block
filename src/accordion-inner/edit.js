@@ -15,6 +15,8 @@ import {
 	useBlockProps,
 	RichText,
 	useInnerBlocksProps,
+	BlockControls,
+	HeadingLevelDropdown,
 } from '@wordpress/block-editor';
 import { useEffect, useState } from '@wordpress/element';
 
@@ -42,19 +44,21 @@ export default function Edit( {
 } ) {
 	const blockProps = useBlockProps();
 	const innerBlocksProps = useInnerBlocksProps();
+
 	// Get the heading text and set up a local state for it
 	const [ heading, setHeading ] = useState( attributes.heading );
-	// Get the content text and set up a local state for it
-	// const [ content, setContent ] = useState( attributes.content );
+	const [ level, setLevel ] = useState( attributes.level );
+	const [ tagName, setTagName ] = useState( 'h' + attributes.level );
 
 	const updateHeading = ( value ) => {
 		setAttributes( { heading: value } );
 		setHeading( value );
 	};
-	// const updateContent = ( value ) => {
-	// 	setAttributes( { content: value } );
-	// 	setContent( value );
-	// };
+	const updateLevel = ( value ) => {
+		setAttributes( { level: value } );
+		setLevel( value );
+		setTagName( 'h' + value );
+	};
 
 	// This is a hook that is used to set the block's clientId as an attribute.
 	useEffect( () => {
@@ -63,10 +67,16 @@ export default function Edit( {
 
 	return (
 		<div { ...blockProps }>
+			<BlockControls>
+				<HeadingLevelDropdown
+					value={ level }
+					onChange={ updateLevel }
+				/>
+			</BlockControls>
 			<RichText
 				value={ heading }
 				onChange={ updateHeading }
-				tagName="h3"
+				tagName={ tagName }
 				placeholder="Enter heading here..."
 				className="wp-block-a11y-day-accordion-heading"
 				tabIndex="0"

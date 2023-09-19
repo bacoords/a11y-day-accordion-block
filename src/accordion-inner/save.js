@@ -16,9 +16,10 @@ import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
  * @return {WPElement} Element to render.
  */
 export default function save( { attributes } ) {
+	const TagName = 'h' + attributes.level;
 	return (
 		<div { ...useBlockProps.save() }>
-			<h3 className="wp-block-a11y-day-accordion-heading">
+			<TagName className="wp-block-a11y-day-accordion-heading">
 				<button
 					type="button"
 					aria-expanded="false"
@@ -27,7 +28,7 @@ export default function save( { attributes } ) {
 					id={ `${ attributes.id }-heading` }
 					dangerouslySetInnerHTML={ { __html: attributes.heading } }
 				></button>
-			</h3>
+			</TagName>
 			<div
 				id={ `${ attributes.id }-content` }
 				role="region"

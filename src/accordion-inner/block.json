@@ -17,6 +17,10 @@
 			"type": "string",
 			"selector": "wp-block-a11y-day-accordion-heading"
 		},
+		"level": {
+			"type": "number",
+			"default": 3
+		},
 		"id": {
 			"type": "string",
 			"default": ""

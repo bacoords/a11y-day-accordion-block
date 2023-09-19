@@ -60,21 +60,24 @@ function Edit({
 }) {
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useInnerBlocksProps)();
+
   // Get the heading text and set up a local state for it
   const [heading, setHeading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.heading);
-  // Get the content text and set up a local state for it
-  // const [ content, setContent ] = useState( attributes.content );
-
+  const [level, setLevel] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.level);
+  const [tagName, setTagName] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('h' + attributes.level);
   const updateHeading = value => {
     setAttributes({
       heading: value
     });
     setHeading(value);
   };
-  // const updateContent = ( value ) => {
-  // 	setAttributes( { content: value } );
-  // 	setContent( value );
-  // };
+  const updateLevel = value => {
+    setAttributes({
+      level: value
+    });
+    setLevel(value);
+    setTagName('h' + value);
+  };
 
   // This is a hook that is used to set the block's clientId as an attribute.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -84,10 +87,13 @@ function Edit({
   }, [clientId]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.HeadingLevelDropdown, {
+    value: level,
+    onChange: updateLevel
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
     value: heading,
     onChange: updateHeading,
-    tagName: "h3",
+    tagName: tagName,
     placeholder: "Enter heading here...",
     className: "wp-block-a11y-day-accordion-heading",
     tabIndex: "0"
@@ -192,9 +198,10 @@ __webpack_require__.r(__webpack_exports__);
 function save({
   attributes
 }) {
+  const TagName = 'h' + attributes.level;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save()
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(TagName, {
     className: "wp-block-a11y-day-accordion-heading"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
@@ -287,7 +294,7 @@ module.exports = window["wp"]["i18n"];
   \****************************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"a11y-day/accordion-inner-block","version":"0.1.0","title":"Accordion Inner Block","category":"widgets","icon":"arrow-right","description":"Accordion heading and panel.","example":{},"parent":["a11y-day/accordion-block"],"supports":{"html":false},"attributes":{"heading":{"type":"string","selector":"wp-block-a11y-day-accordion-heading"},"id":{"type":"string","default":""}},"textdomain":"accordion-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"a11y-day/accordion-inner-block","version":"0.1.0","title":"Accordion Inner Block","category":"widgets","icon":"arrow-right","description":"Accordion heading and panel.","example":{},"parent":["a11y-day/accordion-block"],"supports":{"html":false},"attributes":{"heading":{"type":"string","selector":"wp-block-a11y-day-accordion-heading"},"level":{"type":"number","default":3},"id":{"type":"string","default":""}},"textdomain":"accordion-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 
