@@ -6,7 +6,9 @@
  */
 
 .wp-block-a11y-day-accordion-block {
+
 	> * + * {
+
 		.wp-block-a11y-day-accordion-heading {
 			margin-top: var(--wp--style--block-gap);
 		}

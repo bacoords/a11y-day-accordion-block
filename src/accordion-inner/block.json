@@ -8,7 +8,7 @@
 	"icon": "arrow-right",
 	"description": "Accordion heading and panel.",
 	"example": {},
-	"parent": ["a11y-day/accordion-block"],
+	"parent": [ "a11y-day/accordion-block" ],
 	"supports": {
 		"html": false
 	},

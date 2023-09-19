@@ -6,6 +6,7 @@
  */
 
 .wp-block-a11y-day-accordion-inner-block {
+
 	.wp-block-a11y-day-accordion-heading {
 		background-color: var(--wp--preset--color--contrast);
 		color: var(--wp--preset--color--base);
@@ -15,18 +16,15 @@
 			background-color: transparent;
 			border: 0;
 			border-radius: 0;
-			display: block;
 			width: 100%;
 			font-size: inherit;
 			text-align: inherit;
 			cursor: pointer;
 			color: var(--wp--preset--color--base);
-			// padding: var(--wp--style--root--padding-top) var(--wp--style--root--padding-right)
-			// var(--wp--style--root--padding-bottom) var(--wp--style--root--padding-left);
-
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+
 			&::after {
 				content: "▶";
 				font-size: 0.25em;
@@ -34,7 +32,9 @@
 				display: inline-block;
 				margin-right: 0.5em;
 			}
+
 			&[aria-expanded="true"] {
+
 				&::after {
 					transform: rotate(90deg);
 				}
@@ -43,13 +43,18 @@
 	}
 
 	.wp-block-a11y-day-accordion-panel {
-		padding: var(--wp--style--root--padding-top) var(--wp--style--root--padding-right)
-			var(--wp--style--root--padding-bottom) var(--wp--style--root--padding-left);
+		padding:
+			var(--wp--style--root--padding-top)
+			var(--wp--style--root--padding-right)
+			var(--wp--style--root--padding-bottom)
+			var(--wp--style--root--padding-left);
 		display: none;
 		transition: opacity 0.3s ease-in;
 	}
+
 	&.is-selected,
 	&.has-child-selected {
+
 		.wp-block-a11y-day-accordion-panel {
 			display: block;
 		}
