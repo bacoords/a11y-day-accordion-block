@@ -6,7 +6,7 @@
   "title": "Accordion Inner Block",
   "category": "widgets",
   "icon": "arrow-right",
-  "description": "Example block scaffolded with Create Block tool.",
+  "description": "Accordion heading and panel.",
   "example": {},
   "parent": [
     "a11y-day/accordion-block"
@@ -15,13 +15,9 @@
     "html": false
   },
   "attributes": {
-    "content": {
-      "type": "string",
-      "selector": "accordion-content"
-    },
     "heading": {
       "type": "string",
-      "selector": "accordion-heading"
+      "selector": "wp-block-a11y-day-accordion-heading"
     },
     "id": {
       "type": "string",

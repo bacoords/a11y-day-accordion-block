@@ -1,1 +1,31 @@
-.wp-block-a11y-day-accordion-inner-block button{all:unset;display:block;width:100%}.wp-block-a11y-day-accordion-inner-block .accordion-panel{display:none;transition:opacity .3s ease-in}.wp-block-a11y-day-accordion-inner-block.is-selected .accordion-panel{display:block}
+/*!*******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/accordion-inner/style.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading {
+  background-color: var(--wp--preset--color--contrast);
+  color: var(--wp--preset--color--base);
+  margin: 0;
+}
+.wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading button {
+  all: unset;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  padding: var(--wp--style--root--padding-top) var(--wp--style--root--padding-right) var(--wp--style--root--padding-bottom) var(--wp--style--root--padding-left);
+}
+.wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-panel {
+  padding: var(--wp--style--root--padding-top) var(--wp--style--root--padding-right) var(--wp--style--root--padding-bottom) var(--wp--style--root--padding-left);
+  display: none;
+  transition: opacity 0.3s ease-in;
+}
+.wp-block-a11y-day-accordion-inner-block.is-selected .wp-block-a11y-day-accordion-panel, .wp-block-a11y-day-accordion-inner-block.has-child-selected .wp-block-a11y-day-accordion-panel {
+  display: block;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

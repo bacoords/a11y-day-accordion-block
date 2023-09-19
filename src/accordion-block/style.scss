@@ -6,4 +6,11 @@
  */
 
 .wp-block-a11y-day-accordion-block {
+	border: 1px solid var(--wp--preset--color--contrast);
+	> * + * {
+		border-top: 1px solid var(--wp--preset--color--contrast);
+		.wp-block-a11y-day-accordion-heading {
+			border-top: 1px solid var(--wp--preset--color--base);
+		}
+	}
 }

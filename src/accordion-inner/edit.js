@@ -11,7 +11,11 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	RichText,
+	useInnerBlocksProps,
+} from '@wordpress/block-editor';
 import { useEffect, useState } from '@wordpress/element';
 
 /**
@@ -30,20 +34,27 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit( { attributes, setAttributes, clientId } ) {
+export default function Edit( {
+	attributes,
+	setAttributes,
+	clientId,
+	isSelected,
+} ) {
+	const blockProps = useBlockProps();
+	const innerBlocksProps = useInnerBlocksProps();
 	// Get the heading text and set up a local state for it
 	const [ heading, setHeading ] = useState( attributes.heading );
 	// Get the content text and set up a local state for it
-	const [ content, setContent ] = useState( attributes.content );
+	// const [ content, setContent ] = useState( attributes.content );
 
 	const updateHeading = ( value ) => {
 		setAttributes( { heading: value } );
 		setHeading( value );
 	};
-	const updateContent = ( value ) => {
-		setAttributes( { content: value } );
-		setContent( value );
-	};
+	// const updateContent = ( value ) => {
+	// 	setAttributes( { content: value } );
+	// 	setContent( value );
+	// };
 
 	// This is a hook that is used to set the block's clientId as an attribute.
 	useEffect( () => {
@@ -51,28 +62,22 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	}, [ clientId ] );
 
 	return (
-		<div { ...useBlockProps() }>
+		<div { ...blockProps }>
 			<RichText
 				value={ heading }
 				onChange={ updateHeading }
 				tagName="h3"
 				placeholder="Enter heading here..."
-				className="accordion-heading"
-				tabindex="0"
+				className="wp-block-a11y-day-accordion-heading"
+				tabIndex="0"
 			/>
 			<div
 				id="sect1"
 				role="region"
 				aria-labelledby="accordion1id"
-				className="accordion-panel"
+				className="wp-block-a11y-day-accordion-panel"
 			>
-				<RichText
-					value={ content }
-					onChange={ updateContent }
-					tagName="div"
-					placeholder="Enter content here..."
-					className="accordion-content"
-				/>
+				<div { ...innerBlocksProps } />
 			</div>
 		</div>
 	);

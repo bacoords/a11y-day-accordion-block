@@ -6,18 +6,30 @@
  */
 
 .wp-block-a11y-day-accordion-inner-block {
-	button {
-		all: unset;
-		display: block;
-		width: 100%;
+	.wp-block-a11y-day-accordion-heading {
+		background-color: var(--wp--preset--color--contrast);
+		color: var(--wp--preset--color--base);
+		margin: 0;
+
+		button {
+			all: unset;
+			display: block;
+			width: 100%;
+			cursor: pointer;
+			padding: var(--wp--style--root--padding-top) var(--wp--style--root--padding-right)
+				var(--wp--style--root--padding-bottom) var(--wp--style--root--padding-left);
+		}
 	}
 
-	.accordion-panel {
+	.wp-block-a11y-day-accordion-panel {
+		padding: var(--wp--style--root--padding-top) var(--wp--style--root--padding-right)
+			var(--wp--style--root--padding-bottom) var(--wp--style--root--padding-left);
 		display: none;
 		transition: opacity 0.3s ease-in;
 	}
-	&.is-selected {
-		.accordion-panel {
+	&.is-selected,
+	&.has-child-selected {
+		.wp-block-a11y-day-accordion-panel {
 			display: block;
 		}
 	}

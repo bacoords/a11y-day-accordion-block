@@ -1,1 +1,70 @@
-!function(){const e=document.querySelectorAll(".wp-block-a11y-day-accordion-inner-block");function t(e){const t=e.querySelector("button[aria-expanded]"),o=t.getAttribute("aria-controls");return{accordionHeader:t,accordionContent:document.getElementById(o)}}function o(e,t){"toggle"===t?e.classList.toggle("is-selected"):e.classList.remove("is-selected")}e.forEach((n=>{const{accordionHeader:c,accordionContent:r}=t(n);c.addEventListener("click",(()=>function(n,c,r){isAccordionOpen="true"===n.getAttribute("aria-expanded"),isAccordionOpen||e.forEach((e=>{const{accordionHeader:n,accordionContent:r}=t(e);r!==c&&(o(e,"remove"),n.setAttribute("aria-expanded","false"))})),o(r,"toggle"),n.setAttribute("aria-expanded",!isAccordionOpen)}(c,r,n)))}))}();
+/******/ (function() { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!*************************************!*\
+  !*** ./src/accordion-block/view.js ***!
+  \*************************************/
+const accordions = document.querySelectorAll('.wp-block-a11y-day-accordion-inner-block');
+// Add event listeners to all accordions and toggle them on click
+accordions.forEach(accordion => {
+  const {
+    accordionHeader,
+    accordionContent
+  } = accordionParts(accordion);
+  accordionHeader.addEventListener('click', () => toggleAccordionItem(accordionHeader, accordionContent, accordion));
+});
+
+/**
+ * Toggle the accordion item
+ * @param {HTMLElement} accordionHeader the button that controls the accordion
+ * @param {HTMLElement} panel the panel that is controlled by the accordion
+ * @param {HTMLElement} accordion the accordion item
+ */
+function toggleAccordionItem(accordionHeader, panel, accordion) {
+  isAccordionOpen = accordionHeader.getAttribute('aria-expanded') === 'true';
+  if (!isAccordionOpen) {
+    // Hide every panel but the one we want to show
+    accordions.forEach(accordion => {
+      const {
+        accordionHeader,
+        accordionContent
+      } = accordionParts(accordion);
+      if (accordionContent !== panel) {
+        toggleIsSelected(accordion, 'remove');
+        accordionHeader.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+  toggleIsSelected(accordion, 'toggle');
+  accordionHeader.setAttribute('aria-expanded', !isAccordionOpen);
+}
+
+/**
+ * Get the header and content elements of an accordion item
+ * @param {HTMLElement} accordion An accordion item
+ * @returns an object containing the accordion header and content element
+ */
+function accordionParts(accordion) {
+  const accordionHeader = accordion.querySelector('button[aria-expanded]');
+  const controlsId = accordionHeader.getAttribute('aria-controls');
+  const accordionContent = document.getElementById(controlsId);
+  return {
+    accordionHeader,
+    accordionContent
+  };
+}
+
+/**
+ * Add or remove the is-selected class from an Element
+ * @param {HTMLELEMENT} element the element to add or remove the class from
+ * @param {string} type accepts "toggle" or "remove"
+ */
+function toggleIsSelected(element, type) {
+  if ('toggle' === type) {
+    element.classList.toggle('is-selected');
+  } else {
+    element.classList.remove('is-selected');
+  }
+}
+/******/ })()
+;
+//# sourceMappingURL=view.js.map

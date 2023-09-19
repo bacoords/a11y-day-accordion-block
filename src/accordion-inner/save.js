@@ -4,7 +4,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 /**
  * The save function defines the way in which the different attributes should
@@ -18,7 +18,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 export default function save( { attributes } ) {
 	return (
 		<div { ...useBlockProps.save() }>
-			<h3 className="accordion-heading">
+			<h3 className="wp-block-a11y-day-accordion-heading">
 				<button
 					type="button"
 					aria-expanded="false"
@@ -32,12 +32,9 @@ export default function save( { attributes } ) {
 				id={ `${ attributes.id }-content` }
 				role="region"
 				aria-labelledby={ `${ attributes.id }-heading` }
-				className="accordion-panel"
+				className="wp-block-a11y-day-accordion-panel"
 			>
-				<div
-					className="accordion-content"
-					dangerouslySetInnerHTML={ { __html: attributes.content } }
-				></div>
+				<div { ...useInnerBlocksProps.save() } />
 			</div>
 		</div>
 	);
