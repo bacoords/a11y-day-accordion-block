@@ -94,6 +94,7 @@ function Edit({
     value: heading,
     onChange: updateHeading,
     tagName: tagName,
+    allowedFormats: ['core/bold', 'core/italic'],
     placeholder: "Enter heading here...",
     className: "wp-block-a11y-day-accordion-heading",
     tabIndex: "0"
