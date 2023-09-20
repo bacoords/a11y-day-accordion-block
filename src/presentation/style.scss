@@ -23,7 +23,7 @@
 	--light: #e7e7e8;
 	--r-background-color: #f7f5f7;
 	--r-main-font: "Lexend", sans-serif;
-	--r-main-font-size: clamp(1.20rem, calc(1.07rem + 0.63vw), 1.56rem);
+	--r-main-font-size: clamp(1.2rem, calc(1.07rem + 0.63vw), 1.56rem);
 	--r-main-color: var(--foreground);
 	// --r-block-margin: #{$blockMargin};
 	// --r-heading-margin: #{$headingMargin};
@@ -36,10 +36,10 @@
 	// --r-heading-font-weight: #{$headingFontWeight};
 	// --r-heading1-text-shadow: #{$heading1TextShadow};
 	--r-heading1-size: clamp(2.49rem, calc(2.03rem + 2.31vw), 3.82rem);
-	--r-heading2-size: clamp(2.07rem, calc(1.73rem + 1.70vw), 3.05rem);
+	--r-heading2-size: clamp(2.07rem, calc(1.73rem + 1.7vw), 3.05rem);
 	--r-heading3-size: clamp(1.73rem, calc(1.48rem + 1.24vw), 2.44rem);
 	--r-heading4-size: clamp(1.44rem, calc(1.26rem + 0.89vw), 1.95rem);
-	--small-size: clamp(0.83rem, calc(0.78rem + 0.29vw), 1.00rem);
+	--small-size: clamp(0.83rem, calc(0.78rem + 0.29vw), 1rem);
 	// --r-code-font: #{$codeFont};
 	--r-link-color: var(--foreground);
 	// --r-link-color-dark: #{darken($linkColor , 15% )};
@@ -62,10 +62,12 @@
 	.feature-slide {
 		background-color: var(--highlight);
 	}
-	.title-slide, .feature-slide {
-
+	.title-slide,
+	.feature-slide {
 		.colophon {
-			img { max-width: 100px}
+			img {
+				max-width: 100px;
+			}
 		}
 	}
 	.authors {
@@ -101,8 +103,6 @@
 	p {
 		max-width: 45ch;
 	}
-
-
 }
 
 .checkmark {
@@ -110,21 +110,20 @@
 	position: relative;
 	padding-left: 0.8em;
 	&::before {
-	  content: "";
-	  display: inline-block;
-	  position: absolute;
-	  left: -0.5em;
-	  top: 0;
-	  transform: rotate(45deg);
-	  height: 1em;
-	  width: 0.5em;
-	  border-bottom: 0.15em solid;
-	  border-right: 0.15em solid;
+		content: "";
+		display: inline-block;
+		position: absolute;
+		left: -0.5em;
+		top: 0;
+		transform: rotate(45deg);
+		height: 1em;
+		width: 0.5em;
+		border-bottom: 0.15em solid;
+		border-right: 0.15em solid;
 	}
 	&:is(li) {
-	//   margin-left: 1em;
-	  &:not(:first-child) {
-		margin-top: 1em;
-	  }
+		&:not(:first-child) {
+			margin-top: 1em;
+		}
 	}
-  }
+}

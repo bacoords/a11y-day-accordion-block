@@ -20,15 +20,15 @@
   --light: #e7e7e8;
   --r-background-color: #f7f5f7;
   --r-main-font: "Lexend", sans-serif;
-  --r-main-font-size: clamp(1.20rem, calc(1.07rem + 0.63vw), 1.56rem);
+  --r-main-font-size: clamp(1.2rem, calc(1.07rem + 0.63vw), 1.56rem);
   --r-main-color: var(--foreground);
   --r-heading-font: "DM Serif Display", serif;
   --r-heading-color: var(--foreground);
   --r-heading1-size: clamp(2.49rem, calc(2.03rem + 2.31vw), 3.82rem);
-  --r-heading2-size: clamp(2.07rem, calc(1.73rem + 1.70vw), 3.05rem);
+  --r-heading2-size: clamp(2.07rem, calc(1.73rem + 1.7vw), 3.05rem);
   --r-heading3-size: clamp(1.73rem, calc(1.48rem + 1.24vw), 2.44rem);
   --r-heading4-size: clamp(1.44rem, calc(1.26rem + 0.89vw), 1.95rem);
-  --small-size: clamp(0.83rem, calc(0.78rem + 0.29vw), 1.00rem);
+  --small-size: clamp(0.83rem, calc(0.78rem + 0.29vw), 1rem);
   --r-link-color: var(--foreground);
   --r-link-color-hover: var(--foreground);
   --r-selection-background-color: var(--secondary);
@@ -48,7 +48,8 @@
 .reveal .feature-slide {
   background-color: var(--highlight);
 }
-.reveal .title-slide .colophon img, .reveal .feature-slide .colophon img {
+.reveal .title-slide .colophon img,
+.reveal .feature-slide .colophon img {
   max-width: 100px;
 }
 .reveal .authors {
