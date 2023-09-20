@@ -9,8 +9,8 @@
  * Replace them with your own styles or remove the file completely.
  */
 .wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading {
-  background-color: var(--wp--preset--color--contrast);
-  color: var(--wp--preset--color--base);
+  background-color: var(--wp--preset--color--black);
+  color: var(--wp--preset--color--white);
   margin: 0;
 }
 .wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading button {
@@ -21,7 +21,7 @@
   font-size: inherit;
   text-align: inherit;
   cursor: pointer;
-  color: var(--wp--preset--color--base);
+  color: var(--wp--preset--color--white);
   display: flex;
   justify-content: space-between;
   align-items: center;
