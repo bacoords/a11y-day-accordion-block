@@ -37,7 +37,7 @@
   transform: rotate(90deg);
 }
 .wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-panel {
-  padding: var(--wp--style--root--padding-top) var(--wp--style--root--padding-right) var(--wp--style--root--padding-bottom) var(--wp--style--root--padding-left);
+  padding: calc(var(--wp--style--block-gap) / 2);
   display: none;
   transition: opacity 0.3s ease-in;
 }
