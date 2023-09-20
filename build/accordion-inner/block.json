@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "a11y-day/accordion-inner-block",
   "version": "0.1.0",
-  "title": "Accordion Inner Block",
+  "title": "Accordion Section",
   "category": "widgets",
   "icon": "arrow-right",
   "description": "Accordion heading and panel.",

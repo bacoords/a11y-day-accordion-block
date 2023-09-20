@@ -6,7 +6,7 @@
 	"title": "Accordion",
 	"category": "widgets",
 	"icon": "sort",
-	"description": "Example block scaffolded with Create Block tool.",
+	"description": "Container block to hold multiple accordion sections.",
 	"example": {},
 	"supports": {
 		"html": false
