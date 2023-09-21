@@ -79,20 +79,28 @@ export default function Edit( {
 
 	// Handler for when the heading text is updated
 	const updateHeading = ( value ) => {
+		// Update the block's heading attribute.
 		setAttributes( { heading: value } );
+
+		// Update the local state for the heading text.
 		setHeading( value );
 	};
 
 	// Handler for when the heading level is updated
 	const updateLevel = ( value ) => {
+		// Update the block's level attribute.
+		setAttributes( { level: value } );
+
+		// Update the local state for the heading level.
+		setLevel( value );
+
+		// Update the local state for the heading tag name.
+		setTagName( 'h' + value );
+
 		// Update the parent block's level attribute.
 		updateBlockAttributes( rootClientId, {
 			level: value,
 		} );
-
-		setAttributes( { level: value } );
-		setLevel( value );
-		setTagName( 'h' + value );
 	};
 
 	// This is a hook that is used to set the block's clientId as an attribute.
@@ -103,7 +111,8 @@ export default function Edit( {
 	}, [ clientId ] );
 
 	// This is a hook that is used to set the block's level if it changes in the
-	// parent block.
+	// parent block. For example, if another accordion section changes the level
+	// of the accordion, this hook will update the level of this section.
 	useEffect( () => {
 		updateLevel( context[ 'a11yDay/level' ] );
 	}, [ context[ 'a11yDay/level' ] ] );
