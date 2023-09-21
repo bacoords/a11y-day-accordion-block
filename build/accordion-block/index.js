@@ -52,6 +52,7 @@ __webpack_require__.r(__webpack_exports__);
  * @return {WPElement} Element to render.
  */
 function Edit() {
+  // Set up our block props and innerblocks props.
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useInnerBlocksProps)(blockProps, {
     allowedBlocks: ['a11y-day/accordion-inner-block'],
@@ -229,7 +230,7 @@ module.exports = window["wp"]["i18n"];
   \****************************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"a11y-day/accordion-block","version":"0.1.0","title":"Accordion","category":"widgets","icon":"sort","description":"Container block to hold multiple accordion sections.","example":{},"supports":{"html":false},"textdomain":"accordion-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"a11y-day/accordion-block","version":"0.1.0","title":"Accordion","category":"widgets","icon":"sort","description":"Container block to hold multiple accordion sections.","example":{},"supports":{"html":false},"attributes":{"level":{"type":"number","default":3}},"providesContext":{"a11yDay/level":"level"},"textdomain":"accordion-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

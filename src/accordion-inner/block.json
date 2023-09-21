@@ -26,6 +26,7 @@
 			"default": ""
 		}
 	},
+	"usesContext": [ "a11yDay/level" ],
 	"textdomain": "accordion-block",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

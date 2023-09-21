@@ -18,7 +18,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.scss */ "./src/accordion-inner/editor.scss");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/accordion-inner/editor.scss");
 
 /**
  * Retrieves the translation of text.
@@ -33,6 +35,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
+
 
 
 
@@ -56,22 +59,54 @@ function Edit({
   attributes,
   setAttributes,
   clientId,
-  isSelected
+  isSelected,
+  context
 }) {
+  // Set up our block props and innerblocks props.
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useInnerBlocksProps)();
 
+  // Get the heading level and set up a local state for it
+  const [level, setLevel] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(context['a11yDay/level']);
+
   // Get the heading text and set up a local state for it
   const [heading, setHeading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.heading);
-  const [level, setLevel] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.level);
-  const [tagName, setTagName] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('h' + attributes.level);
+
+  // Convert our heading level into a proper heading tag name
+  const [tagName, setTagName] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('h' + context['a11yDay/level']);
+
+  // Get the clientId of the root block so we can update its level attribute
+  const {
+    rootClientId
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
+    const {
+      getBlockRootClientId
+    } = select(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.store);
+    const rootId = getBlockRootClientId(clientId);
+    return {
+      rootClientId: rootId
+    };
+  }, [clientId]);
+
+  // Get the dispatch function so we can update the root block's level attribute
+  const {
+    updateBlockAttributes
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useDispatch)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.store);
+
+  // Handler for when the heading text is updated
   const updateHeading = value => {
     setAttributes({
       heading: value
     });
     setHeading(value);
   };
+
+  // Handler for when the heading level is updated
   const updateLevel = value => {
+    // Update the parent block's level attribute.
+    updateBlockAttributes(rootClientId, {
+      level: value
+    });
     setAttributes({
       level: value
     });
@@ -80,11 +115,19 @@ function Edit({
   };
 
   // This is a hook that is used to set the block's clientId as an attribute.
+  // We're using this to set the block's ID attribute so that each accordion
+  // section has a unique ID.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     setAttributes({
       id: clientId
     });
   }, [clientId]);
+
+  // This is a hook that is used to set the block's level if it changes in the
+  // parent block.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    updateLevel(context['a11yDay/level']);
+  }, [context['a11yDay/level']]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.HeadingLevelDropdown, {
@@ -269,6 +312,16 @@ module.exports = window["wp"]["blocks"];
 
 /***/ }),
 
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/***/ (function(module) {
+
+module.exports = window["wp"]["data"];
+
+/***/ }),
+
 /***/ "@wordpress/element":
 /*!*********************************!*\
   !*** external ["wp","element"] ***!
@@ -295,7 +348,7 @@ module.exports = window["wp"]["i18n"];
   \****************************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"a11y-day/accordion-inner-block","version":"0.1.0","title":"Accordion Section","category":"widgets","icon":"arrow-right","description":"Accordion heading and panel.","example":{},"parent":["a11y-day/accordion-block"],"supports":{"html":false},"attributes":{"heading":{"type":"string","selector":"wp-block-a11y-day-accordion-heading"},"level":{"type":"number","default":3},"id":{"type":"string","default":""}},"textdomain":"accordion-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"a11y-day/accordion-inner-block","version":"0.1.0","title":"Accordion Section","category":"widgets","icon":"arrow-right","description":"Accordion heading and panel.","example":{},"parent":["a11y-day/accordion-block"],"supports":{"html":false},"attributes":{"heading":{"type":"string","selector":"wp-block-a11y-day-accordion-heading"},"level":{"type":"number","default":3},"id":{"type":"string","default":""}},"usesContext":["a11yDay/level"],"textdomain":"accordion-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

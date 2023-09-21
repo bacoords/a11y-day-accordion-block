@@ -17,8 +17,10 @@ import {
 	useInnerBlocksProps,
 	BlockControls,
 	HeadingLevelDropdown,
+	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { useEffect, useState } from '@wordpress/element';
+import { useSelect, useDispatch } from '@wordpress/data';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -41,29 +43,70 @@ export default function Edit( {
 	setAttributes,
 	clientId,
 	isSelected,
+	context,
 } ) {
+	// Set up our block props and innerblocks props.
 	const blockProps = useBlockProps();
 	const innerBlocksProps = useInnerBlocksProps();
 
+	// Get the heading level and set up a local state for it
+	const [ level, setLevel ] = useState( context[ 'a11yDay/level' ] );
+
 	// Get the heading text and set up a local state for it
 	const [ heading, setHeading ] = useState( attributes.heading );
-	const [ level, setLevel ] = useState( attributes.level );
-	const [ tagName, setTagName ] = useState( 'h' + attributes.level );
 
+	// Convert our heading level into a proper heading tag name
+	const [ tagName, setTagName ] = useState(
+		'h' + context[ 'a11yDay/level' ]
+	);
+
+	// Get the clientId of the root block so we can update its level attribute
+	const { rootClientId } = useSelect(
+		( select ) => {
+			const { getBlockRootClientId } = select( blockEditorStore );
+
+			const rootId = getBlockRootClientId( clientId );
+
+			return {
+				rootClientId: rootId,
+			};
+		},
+		[ clientId ]
+	);
+
+	// Get the dispatch function so we can update the root block's level attribute
+	const { updateBlockAttributes } = useDispatch( blockEditorStore );
+
+	// Handler for when the heading text is updated
 	const updateHeading = ( value ) => {
 		setAttributes( { heading: value } );
 		setHeading( value );
 	};
+
+	// Handler for when the heading level is updated
 	const updateLevel = ( value ) => {
+		// Update the parent block's level attribute.
+		updateBlockAttributes( rootClientId, {
+			level: value,
+		} );
+
 		setAttributes( { level: value } );
 		setLevel( value );
 		setTagName( 'h' + value );
 	};
 
 	// This is a hook that is used to set the block's clientId as an attribute.
+	// We're using this to set the block's ID attribute so that each accordion
+	// section has a unique ID.
 	useEffect( () => {
 		setAttributes( { id: clientId } );
 	}, [ clientId ] );
+
+	// This is a hook that is used to set the block's level if it changes in the
+	// parent block.
+	useEffect( () => {
+		updateLevel( context[ 'a11yDay/level' ] );
+	}, [ context[ 'a11yDay/level' ] ] );
 
 	return (
 		<div { ...blockProps }>

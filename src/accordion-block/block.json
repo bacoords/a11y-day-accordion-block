@@ -11,6 +11,15 @@
 	"supports": {
 		"html": false
 	},
+	"attributes": {
+		"level": {
+			"type": "number",
+			"default": 3
+		}
+	},
+	"providesContext": {
+		"a11yDay/level": "level"
+    },
 	"textdomain": "accordion-block",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
