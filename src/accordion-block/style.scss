@@ -6,7 +6,7 @@
  */
 
 .wp-block-a11y-day-accordion-block {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
+	> * + * {
+		margin-top: var(--wp--style--block-gap);
+	}
 }

@@ -3,10 +3,10 @@
   "apiVersion": 3,
   "name": "a11y-day/accordion-inner-block",
   "version": "0.1.0",
-  "title": "Accordion Inner Block",
+  "title": "Accordion Section",
   "category": "widgets",
-  "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
+  "icon": "arrow-right",
+  "description": "Accordion heading and panel.",
   "example": {},
   "parent": [
     "a11y-day/accordion-block"
@@ -14,6 +14,23 @@
   "supports": {
     "html": false
   },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "selector": "wp-block-a11y-day-accordion-heading"
+    },
+    "level": {
+      "type": "number",
+      "default": 3
+    },
+    "id": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "usesContext": [
+    "a11yDay/level"
+  ],
   "textdomain": "accordion-block",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
