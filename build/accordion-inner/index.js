@@ -153,9 +153,9 @@ function Edit({
     className: "wp-block-a11y-day-accordion-heading",
     tabIndex: "0"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    id: "sect1",
+    id: `${attributes.id}-content`,
     role: "region",
-    "aria-labelledby": "accordion1id",
+    "aria-labelledby": `${attributes.id}-heading`,
     className: "wp-block-a11y-day-accordion-panel"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...innerBlocksProps

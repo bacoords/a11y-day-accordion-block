@@ -135,9 +135,9 @@ export default function Edit( {
 				tabIndex="0"
 			/>
 			<div
-				id="sect1"
+				id={ `${ attributes.id }-content` }
 				role="region"
-				aria-labelledby="accordion1id"
+				aria-labelledby={ `${ attributes.id }-heading` }
 				className="wp-block-a11y-day-accordion-panel"
 			>
 				<div { ...innerBlocksProps } />

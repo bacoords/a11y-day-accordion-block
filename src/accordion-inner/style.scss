@@ -48,7 +48,7 @@
 
 	&.is-selected,
 	&.has-child-selected {
-		.wp-block-a11y-day-accordion-panel {
+		> .wp-block-a11y-day-accordion-panel {
 			display: block;
 		}
 	}
