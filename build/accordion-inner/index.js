@@ -67,13 +67,13 @@ function Edit({
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useInnerBlocksProps)();
 
   // Get the heading level and set up a local state for it
-  const [level, setLevel] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(context['a11yDay/level']);
+  const [level, setLevel] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.level);
 
   // Get the heading text and set up a local state for it
   const [heading, setHeading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.heading);
 
   // Convert our heading level into a proper heading tag name
-  const [tagName, setTagName] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('h' + context['a11yDay/level']);
+  const [tagName, setTagName] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('h' + attributes.level);
 
   // Get the clientId of the root block so we can update its level attribute
   const {
@@ -106,6 +106,12 @@ function Edit({
 
   // Handler for when the heading level is updated
   const updateLevel = value => {
+    // Update the parent block's level attribute.
+    updateBlockAttributes(rootClientId, {
+      level: value
+    });
+  };
+  const updateLevelLocal = value => {
     // Update the block's level attribute.
     setAttributes({
       level: value
@@ -116,11 +122,6 @@ function Edit({
 
     // Update the local state for the heading tag name.
     setTagName('h' + value);
-
-    // Update the parent block's level attribute.
-    updateBlockAttributes(rootClientId, {
-      level: value
-    });
   };
 
   // This is a hook that is used to set the block's clientId as an attribute.
@@ -136,7 +137,7 @@ function Edit({
   // parent block. For example, if another accordion section changes the level
   // of the accordion, this hook will update the level of this section.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    updateLevel(context['a11yDay/level']);
+    updateLevelLocal(context['a11yDay/level']);
   }, [context['a11yDay/level']]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps

@@ -50,15 +50,13 @@ export default function Edit( {
 	const innerBlocksProps = useInnerBlocksProps();
 
 	// Get the heading level and set up a local state for it
-	const [ level, setLevel ] = useState( context[ 'a11yDay/level' ] );
+	const [ level, setLevel ] = useState( attributes.level );
 
 	// Get the heading text and set up a local state for it
 	const [ heading, setHeading ] = useState( attributes.heading );
 
 	// Convert our heading level into a proper heading tag name
-	const [ tagName, setTagName ] = useState(
-		'h' + context[ 'a11yDay/level' ]
-	);
+	const [ tagName, setTagName ] = useState( 'h' + attributes.level );
 
 	// Get the clientId of the root block so we can update its level attribute
 	const { rootClientId } = useSelect(
@@ -88,6 +86,13 @@ export default function Edit( {
 
 	// Handler for when the heading level is updated
 	const updateLevel = ( value ) => {
+		// Update the parent block's level attribute.
+		updateBlockAttributes( rootClientId, {
+			level: value,
+		} );
+	};
+
+	const updateLevelLocal = ( value ) => {
 		// Update the block's level attribute.
 		setAttributes( { level: value } );
 
@@ -96,11 +101,6 @@ export default function Edit( {
 
 		// Update the local state for the heading tag name.
 		setTagName( 'h' + value );
-
-		// Update the parent block's level attribute.
-		updateBlockAttributes( rootClientId, {
-			level: value,
-		} );
 	};
 
 	// This is a hook that is used to set the block's clientId as an attribute.
@@ -114,7 +114,7 @@ export default function Edit( {
 	// parent block. For example, if another accordion section changes the level
 	// of the accordion, this hook will update the level of this section.
 	useEffect( () => {
-		updateLevel( context[ 'a11yDay/level' ] );
+		updateLevelLocal( context[ 'a11yDay/level' ] );
 	}, [ context[ 'a11yDay/level' ] ] );
 
 	return (
