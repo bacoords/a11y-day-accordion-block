@@ -1,12 +1,24 @@
-const accordions = document.querySelectorAll(
-	'.wp-block-a11y-day-accordion-inner-block'
+const accordionContainers = document.querySelectorAll(
+	'.wp-block-a11y-day-accordion-block'
 );
-// Add event listeners to all accordions and toggle them on click
-accordions.forEach( ( accordion ) => {
-	const { accordionHeader, accordionContent } = accordionParts( accordion );
-	accordionHeader.addEventListener( 'click', () =>
-		toggleAccordionItem( accordionHeader, accordionContent, accordion )
+
+accordionContainers.forEach( ( accordionContainer ) => {
+	const accordions = accordionContainer.querySelectorAll(
+		':scope > .wp-block-a11y-day-accordion-inner-block'
 	);
+	// Add event listeners to all accordions and toggle them on click
+	accordions.forEach( ( accordion ) => {
+		const { accordionHeader, accordionContent } =
+			accordionParts( accordion );
+		accordionHeader.addEventListener( 'click', () =>
+			toggleAccordionItem(
+				accordionHeader,
+				accordionContent,
+				accordion,
+				accordions
+			)
+		);
+	} );
 } );
 
 /**
@@ -14,8 +26,9 @@ accordions.forEach( ( accordion ) => {
  * @param {HTMLElement} accordionHeader the button that controls the accordion
  * @param {HTMLElement} panel the panel that is controlled by the accordion
  * @param {HTMLElement} accordion the accordion item
+ * @param {NodeList} accordions all the accordions in the accordion block
  */
-function toggleAccordionItem( accordionHeader, panel, accordion ) {
+function toggleAccordionItem( accordionHeader, panel, accordion, accordions ) {
 	isAccordionOpen =
 		accordionHeader.getAttribute( 'aria-expanded' ) === 'true';
 	if ( ! isAccordionOpen ) {
@@ -39,7 +52,7 @@ function toggleAccordionItem( accordionHeader, panel, accordion ) {
  * @returns an object containing the accordion header and content element
  */
 function accordionParts( accordion ) {
-	const accordionHeader = accordion.querySelector( 'button[aria-expanded]' );
+	const accordionHeader = accordion.firstChild.firstChild;
 	const controlsId = accordionHeader.getAttribute( 'aria-controls' );
 	const accordionContent = document.getElementById( controlsId );
 	return { accordionHeader, accordionContent };

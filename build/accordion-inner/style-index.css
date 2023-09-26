@@ -41,7 +41,7 @@
   display: none;
   transition: opacity 0.3s ease-in;
 }
-.wp-block-a11y-day-accordion-inner-block.is-selected .wp-block-a11y-day-accordion-panel, .wp-block-a11y-day-accordion-inner-block.has-child-selected .wp-block-a11y-day-accordion-panel {
+.wp-block-a11y-day-accordion-inner-block.is-selected > .wp-block-a11y-day-accordion-panel, .wp-block-a11y-day-accordion-inner-block.has-child-selected > .wp-block-a11y-day-accordion-panel {
   display: block;
 }
 
