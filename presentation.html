@@ -42,11 +42,16 @@
 				<h1>What about the details element?</h1>
 				<details open>
 					<summary>Is this an accordion?</summary>
-					<p>Nope! A semantic accordion doesn't exist yet.</p>
+					<div class="details-inner">
+						<p>Nope! A semantic accordion doesn't exist yet.</p>
+					</div>
+
 				</details>
 				<details>
 					<summary>This is another details element.</summary>
-					<p>I operate independently of any other details element on the page.</p>
+					<div class="details-inner">
+						<p>I operate independently of any other details element on the page.</p>
+					</div>
 				</details>
 			</section>
 			<section class="feature-slide" data-background-color="#a1c69f">
@@ -55,14 +60,16 @@
 			</section>
 			<section class="feature-slide">
 				<ul class="checkmark-list">
-					<li><h2>Keyboard operable</h2>
+					<li>
+						<h2>Keyboard operable</h2>
 						<p>Can you navigate between the accordion sections and their panels with your keyboard?</p>
 					</li>
 				</ul>
 			</section>
 			<section class="feature-slide">
 				<ul class="checkmark-list">
-					<li><h2>Assistive device accessible and navigable</h2>
+					<li>
+						<h2>Assistive device accessible and navigable</h2>
 						<p>Can screen readers and other assistive devices navigate and communicate the list of accordion
 							sections available?</p>
 					</li>
@@ -70,14 +77,16 @@
 			</section>
 			<section class="feature-slide">
 				<ul class="checkmark-list">
-					<li><h2>Responsive</h2>
+					<li>
+						<h2>Responsive</h2>
 						<p>Does the accordion function well regardless of screen size?</p>
 					</li>
 				</ul>
 			</section>
 			<section class="feature-slide">
 				<ul class="checkmark-list">
-					<li><h2>Styled</h2>
+					<li>
+						<h2>Styled</h2>
 						<p>Does the accordion visually indicate collapsed content and suggest how to collapse expanded
 							content?
 						</p>
@@ -168,7 +177,7 @@
 					<div>
 						<h2>Header styles</h2>
 						<img src="assets/accordion-header-sass.png" alt="accordion section header css"
-							style="width: 40vh" />
+							style="width: 25vh" />
 						<code class="screen-reader-only">
 							.wp-block-a11y-day-accordion-heading {
 								&#x9;&#x9;background-color: var(--wp--preset--color--black);
@@ -207,7 +216,7 @@
 					</div>
 					<div class="fragment">
 						<h2>Panel styles</h2>
-						<img src="assets/accordion-panel-sass.png" alt="accordion panel sass" />
+						<img src="assets/accordion-panel-sass.png" alt="accordion panel sass" style="width: 25vh"/>
 						<code class="screen-reader-only">
 							.wp-block-a11y-day-accordion-panel {
 								padding: calc(var(--wp--style--block-gap) / 2);
@@ -225,16 +234,19 @@
 				</div>
 			</section>
 			<section class="feature-slide" data-background-color="#a1c69f">
-				<h1>What does an accessible accordion block look like in the editor?</h1>
+				<h1>What does an accessible accordion block editing experience look like?</h1>
 			</section>
-			<section>
+			<!-- <section>
 				<h1>Structuring the block</h1>
 				<img src="assets/accordion-block-preview.png" alt="accordion block structure with multiple sections">
-			</section>
+			</section> -->
 			<section>
-				<h1>Structuring the Inner Blocks</h1>
+				<h1>The Block Structure</h1>
 				<img src="assets/accordion-block-edit.png"
 					alt="accordion block structure with an editable section that has a heading and panel section">
+			</section>
+			<section class="feature-slide" data-background-color="#a1c69f">
+				<h1>How does an accessible accordion block function in the editor? </h1>
 			</section>
 			<section data-background-color="#a1c69f">
 				<h1>Registering the parent and child blocks</h1>
@@ -245,7 +257,7 @@
 			<section>
 				<h1>Registering the parent block</h1>
 				<div class="flex">
-					<div style="width: 50%;">				<code class="screen-reader-only">
+					<div style="width: 50%;"> <code class="screen-reader-only">
 						{
 							// partial view of the block.json
 							&#x22;name&#x22;: &#x22;a11y-day/accordion-block&#x22;,
@@ -261,8 +273,11 @@
 							}
 						  }
 					</code>
-					<img src="assets/parent-block-json.png" alt="parent block json partial view" style="max-width:30vh"></div>
-					<div style="width: 50%;"><img style="max-width:35vh" class="" src="assets/parent-block-edit.png" alt="the edit function of the accordion parent block"></div>
+						<img src="assets/parent-block-json.png" alt="parent block json partial view"
+							style="max-width:30vh">
+					</div>
+					<div style="width: 50%;"><img style="max-width:35vh" class="" src="assets/parent-block-edit.png"
+							alt="the edit function of the accordion parent block"></div>
 				</div>
 
 			</section>
@@ -293,11 +308,12 @@
 								&#x22;usesContext&#x22;: [ &#x22;a11yDay/level&#x22; ]
 							  }
 						</code>
-						<img src="assets/child-block-json.png" alt="child block json partial view" style="max-width:30vh">
+						<img src="assets/child-block-json.png" alt="child block json partial view"
+							style="max-width:30vh">
 					</div>
 					<div style="width: 50%;">
-						<img src="assets/child-block-edit.png" alt="the return function of the accordion section child block"
-					style="max-width:35vh">
+						<img src="assets/child-block-edit.png"
+							alt="the return function of the accordion section child block" style="max-width:35vh">
 					</div>
 				</div>
 

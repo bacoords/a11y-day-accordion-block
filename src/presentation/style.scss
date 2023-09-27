@@ -154,6 +154,21 @@
 			margin-top: 0;
 		}
 	}
+	details {
+		border: 1px dotted var(--foreground);
+
+		margin-bottom: 1rem;
+		summary {
+			background-color: var(--highlight);
+			padding: 0 0.1em;
+		}
+		.details-inner {
+			padding: 1rem 0.1em;
+		}
+	}
+	table {
+		color: #fff;
+	}
 	.equal-cols {
 		& > * {
 			width: 50%;

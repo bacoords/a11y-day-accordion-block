@@ -126,6 +126,20 @@
 .reveal p:first-child {
   margin-top: 0;
 }
+.reveal details {
+  border: 1px dotted var(--foreground);
+  margin-bottom: 1rem;
+}
+.reveal details summary {
+  background-color: var(--highlight);
+  padding: 0 0.1em;
+}
+.reveal details .details-inner {
+  padding: 1rem 0.1em;
+}
+.reveal table {
+  color: #fff;
+}
 .reveal .equal-cols > * {
   width: 50%;
 }
