@@ -103,8 +103,7 @@ function Edit({
   // Set up our block props and innerblocks props.
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useInnerBlocksProps)({}, {
-    template: TEMPLATE,
-    __experimentalCaptureToolbars: true
+    template: TEMPLATE
   });
 
   // Get the heading level and set up a local state for it

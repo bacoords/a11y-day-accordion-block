@@ -67,7 +67,6 @@ export default function Edit( {
 		{},
 		{
 			template: TEMPLATE,
-			__experimentalCaptureToolbars: true,
 		}
 	);
 
