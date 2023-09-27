@@ -12,6 +12,9 @@
   align-items: center;
   justify-content: space-between;
 }
+.wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading [data-rich-text-placeholder] {
+  width: 100%;
+}
 .wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading::after {
   content: "▶";
   font-size: 0.25em;
