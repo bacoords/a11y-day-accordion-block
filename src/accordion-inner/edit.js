@@ -21,9 +21,22 @@ import {
 } from '@wordpress/block-editor';
 import { useEffect, useState } from '@wordpress/element';
 import { useSelect, useDispatch } from '@wordpress/data';
-import { ToolbarGroup, ToolbarButton, KeyboardShortcuts } from '@wordpress/components';
+import {
+	ToolbarGroup,
+	ToolbarButton,
+	KeyboardShortcuts,
+} from '@wordpress/components';
 import { createBlock } from '@wordpress/blocks';
 import { plus } from '@wordpress/icons';
+
+const TEMPLATE = [
+	[
+		'core/paragraph',
+		{
+			placeholder: __( 'Type / to add a hidden block' ),
+		},
+	],
+];
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -46,11 +59,17 @@ export default function Edit( {
 	setAttributes,
 	clientId,
 	context,
-	name
+	name,
 } ) {
 	// Set up our block props and innerblocks props.
 	const blockProps = useBlockProps();
-	const innerBlocksProps = useInnerBlocksProps();
+	const innerBlocksProps = useInnerBlocksProps(
+		{},
+		{
+			template: TEMPLATE,
+			__experimentalCaptureToolbars: true,
+		}
+	);
 
 	// Get the heading level and set up a local state for it
 	const [ level, setLevel ] = useState( attributes.level );
@@ -76,8 +95,8 @@ export default function Edit( {
 	);
 
 	// Get the dispatch function so we can update the root block's level attribute and insert a new block
-	const { updateBlockAttributes, insertBlock } = useDispatch( blockEditorStore );
-
+	const { updateBlockAttributes, insertBlock } =
+		useDispatch( blockEditorStore );
 
 	// Handler for when the heading text is updated
 	const updateHeading = ( value ) => {
@@ -132,7 +151,7 @@ export default function Edit( {
 		return {
 			parentClientId: firstParentClientId,
 			parentinnerBlocks:
-			select( 'core/block-editor' ).getBlocks( firstParentClientId ),
+				select( 'core/block-editor' ).getBlocks( firstParentClientId ),
 		};
 	}, [] );
 
@@ -144,7 +163,7 @@ export default function Edit( {
 	// Insert a new Accordion Section block after this one
 	const appendNewSection = () => {
 		// first we programmatically create a new Accordion Section block
-		const block = createBlock(name);
+		const block = createBlock( name );
 		// then we insert it after this block by finding this block's position and adding 1
 		insertBlock(
 			block,
@@ -175,17 +194,17 @@ export default function Edit( {
 			</BlockControls>
 			<KeyboardShortcuts
 				// Bind keyboard shortcuts for appending a new section, and listen for this shortcut when the RichText component is focussed, since we the global shortcut doesn't work inside the RichText component.
-                shortcuts={ {
-                    'alt+mod+y': appendNewSection,
-                } }
-            >
-			<RichText
-				value={ heading }
-				onChange={ updateHeading }
-				tagName={ tagName }
-				allowedFormats={ [ 'core/bold', 'core/italic' ] }
-				placeholder="Enter heading here..."
-				className="wp-block-a11y-day-accordion-heading"
+				shortcuts={ {
+					'alt+mod+y': appendNewSection,
+				} }
+			>
+				<RichText
+					value={ heading }
+					onChange={ updateHeading }
+					tagName={ tagName }
+					allowedFormats={ [ 'core/bold', 'core/italic' ] }
+					placeholder="Enter heading here..."
+					className="wp-block-a11y-day-accordion-heading"
 				/>
 			</KeyboardShortcuts>
 			<div
