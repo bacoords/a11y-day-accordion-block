@@ -24,7 +24,8 @@ let deck = new reveal_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
   plugins: [reveal_js_plugin_notes_notes_esm_js__WEBPACK_IMPORTED_MODULE_1__["default"]]
 });
 deck.initialize({
-  autoAnimate: false
+  autoAnimate: false,
+  slideNumber: true
 });
 
 /***/ }),

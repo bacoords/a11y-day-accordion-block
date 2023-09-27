@@ -68,6 +68,19 @@
 			}
 		}
 	}
+	.screen-reader-only {
+		position: absolute;
+		left: -10000px;
+		top: auto;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
+	.flex {
+		display: flex;
+		align-items: start;
+		gap: 1rem;
+	}
 	.authors {
 		margin-top: 5rem;
 		display: flex;
@@ -80,6 +93,9 @@
 		& > * {
 			margin: 0;
 		}
+	}
+	.small {
+		font-size: var(--small-size);
 	}
 	ul {
 		margin-left: 0;

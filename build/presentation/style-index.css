@@ -49,6 +49,19 @@
 .reveal .feature-slide .colophon img {
   max-width: 100px;
 }
+.reveal .screen-reader-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.reveal .flex {
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+}
 .reveal .authors {
   margin-top: 5rem;
   display: flex;
@@ -61,6 +74,9 @@
 }
 .reveal .authors > * {
   margin: 0;
+}
+.reveal .small {
+  font-size: var(--small-size);
 }
 .reveal ul {
   margin-left: 0;

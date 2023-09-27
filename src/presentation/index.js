@@ -9,5 +9,6 @@ let deck = new Reveal({
 	plugins: [Notes],
 });
 deck.initialize({
-	autoAnimate: false
+	autoAnimate: false,
+	slideNumber: true
 });
