@@ -19,6 +19,8 @@
   border-radius: 0;
   width: 100%;
   font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
   text-align: inherit;
   cursor: pointer;
   color: var(--wp--preset--color--white);
