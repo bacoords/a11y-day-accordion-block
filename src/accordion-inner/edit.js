@@ -76,8 +76,9 @@ export default function Edit( {
 		[ clientId ]
 	);
 
-	// Get the dispatch function so we can update the root block's level attribute
-	const { updateBlockAttributes } = useDispatch( blockEditorStore );
+	// Get the dispatch function so we can update the root block's level attribute and insert a new block
+	const { updateBlockAttributes, insertBlock } = useDispatch( blockEditorStore );
+
 
 	// Handler for when the heading text is updated
 	const updateHeading = ( value ) => {
@@ -121,35 +122,35 @@ export default function Edit( {
 		updateLevelLocal( context[ 'a11yDay/level' ] );
 	}, [ context[ 'a11yDay/level' ] ] );
 
-	const { parentBlockType, firstParentClientId } = useSelect( ( select ) => {
-		const { getBlockName, getBlockParents, getSelectedBlockClientId } =
+	// Get the parent block's clientId and innerBlocks so we can insert a new
+	// block after this one.
+	const { parentClientId, parentinnerBlocks } = useSelect( ( select ) => {
+		const { getBlockParents, getSelectedBlockClientId } =
 			select( blockEditorStore );
 		const selectedBlockClientId = getSelectedBlockClientId();
 		const parents = getBlockParents( selectedBlockClientId );
-		const _firstParentClientId = parents[ parents.length - 1 ];
-		const parentBlockName = getBlockName( _firstParentClientId );
-		const _parentBlockType = getBlockType( parentBlockName );
+		const firstParentClientId = parents[ parents.length - 1 ];
 		return {
-			parentBlockType: _parentBlockType,
-			firstParentClientId: _firstParentClientId,
+			parentClientId: firstParentClientId,
+			parentinnerBlocks:
+			select( 'core/block-editor' ).getBlocks( firstParentClientId ),
 		};
 	}, [] );
 
-	const { insertBlock } = useDispatch( 'core/block-editor' );
-	const { parentinnerBlocks } = useSelect( ( select ) => ( {
-		parentinnerBlocks:
-			select( 'core/block-editor' ).getBlocks( firstParentClientId ),
-	} ) );
-
+	// Get the current block's position in the parent block's innerBlocks array
 	function getCurrentBlockPosition( block ) {
 		return block.clientId === clientId;
 	}
+
+	// Insert a new Accordion Section block after this one
 	const appendNewSection = () => {
-		const block = createBlock( name );
+		// first we programmatically create a new Accordion Section block
+		const block = createBlock(name);
+		// then we insert it after this block by finding this block's position and adding 1
 		insertBlock(
 			block,
 			parentinnerBlocks.findIndex( getCurrentBlockPosition ) + 1,
-			firstParentClientId
+			parentClientId
 		);
 	};
 
@@ -168,12 +169,13 @@ export default function Edit( {
 						icon={ plus }
 						label={ __(
 							'Append a new accordion section ( ⌥/Alt + ⌘/Ctrl + Y )',
-							'superlist-block'
+							'accordion-block'
 						) }
 					/>
 				</ToolbarGroup>
 			</BlockControls>
 			<KeyboardShortcuts
+				// Bind keyboard shortcuts for appending a new section, and listen for this shortcut when the RichText component is focussed, since we the global shortcut doesn't work inside the RichText component.
                 shortcuts={ {
                     'alt+mod+y': appendNewSection,
                 } }

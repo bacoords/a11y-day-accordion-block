@@ -124,9 +124,10 @@ function Edit({
     };
   }, [clientId]);
 
-  // Get the dispatch function so we can update the root block's level attribute
+  // Get the dispatch function so we can update the root block's level attribute and insert a new block
   const {
-    updateBlockAttributes
+    updateBlockAttributes,
+    insertBlock
   } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useDispatch)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.store);
 
   // Handler for when the heading text is updated
@@ -175,39 +176,37 @@ function Edit({
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     updateLevelLocal(context['a11yDay/level']);
   }, [context['a11yDay/level']]);
+
+  // Get the parent block's clientId and innerBlocks so we can insert a new
+  // block after this one.
   const {
-    parentBlockType,
-    firstParentClientId
+    parentClientId,
+    parentinnerBlocks
   } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
     const {
-      getBlockName,
       getBlockParents,
       getSelectedBlockClientId
     } = select(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.store);
     const selectedBlockClientId = getSelectedBlockClientId();
     const parents = getBlockParents(selectedBlockClientId);
-    const _firstParentClientId = parents[parents.length - 1];
-    const parentBlockName = getBlockName(_firstParentClientId);
-    const _parentBlockType = (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__.getBlockType)(parentBlockName);
+    const firstParentClientId = parents[parents.length - 1];
     return {
-      parentBlockType: _parentBlockType,
-      firstParentClientId: _firstParentClientId
+      parentClientId: firstParentClientId,
+      parentinnerBlocks: select('core/block-editor').getBlocks(firstParentClientId)
     };
   }, []);
-  const {
-    insertBlock
-  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useDispatch)('core/block-editor');
-  const {
-    parentinnerBlocks
-  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => ({
-    parentinnerBlocks: select('core/block-editor').getBlocks(firstParentClientId)
-  }));
+
+  // Get the current block's position in the parent block's innerBlocks array
   function getCurrentBlockPosition(block) {
     return block.clientId === clientId;
   }
+
+  // Insert a new Accordion Section block after this one
   const appendNewSection = () => {
+    // first we programmatically create a new Accordion Section block
     const block = (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__.createBlock)(name);
-    insertBlock(block, parentinnerBlocks.findIndex(getCurrentBlockPosition) + 1, firstParentClientId);
+    // then we insert it after this block by finding this block's position and adding 1
+    insertBlock(block, parentinnerBlocks.findIndex(getCurrentBlockPosition) + 1, parentClientId);
   };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
@@ -217,8 +216,10 @@ function Edit({
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarButton, {
     onClick: appendNewSection,
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"],
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Append a new accordion section ( ⌥/Alt + ⌘/Ctrl + Y )', 'superlist-block')
-  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.KeyboardShortcuts, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Append a new accordion section ( ⌥/Alt + ⌘/Ctrl + Y )', 'accordion-block')
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.KeyboardShortcuts
+  // Bind keyboard shortcuts for appending a new section, and listen for this shortcut when the RichText component is focussed, since we the global shortcut doesn't work inside the RichText component.
+  , {
     shortcuts: {
       'alt+mod+y': appendNewSection
     }
