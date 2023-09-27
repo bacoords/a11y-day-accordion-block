@@ -135,6 +135,14 @@
 			}
 		}
 	}
+	.fragment-stack {
+		position: relative;
+		& > * {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
+	}
 	.note {
 		font-style: italic;
 		border: 1px solid grey;

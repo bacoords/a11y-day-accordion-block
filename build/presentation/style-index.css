@@ -107,6 +107,14 @@
 .reveal ul.checkmark-list {
   list-style: none;
 }
+.reveal .fragment-stack {
+  position: relative;
+}
+.reveal .fragment-stack > * {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
 .reveal .note {
   font-style: italic;
   border: 1px solid grey;

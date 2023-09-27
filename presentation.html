@@ -54,7 +54,8 @@
 						<p>Does the accordion function well regardless of screen size?</p>
 					</li>
 					<li class="fragment"><u>Styled</u>
-						<p>Does the accordion visually indicate collapsed content and suggest how to collapse expanded content?
+						<p>Does the accordion visually indicate collapsed content and suggest how to collapse expanded
+							content?
 						</p>
 					</li>
 				</ul>
@@ -72,10 +73,10 @@
 			<section>
 				<h1>The HTML</h1>
 
-					<div>
-						<h2>Accordion Block</h2>
-						<img src="assets/accordion-html.png" alt="accordion html" style="width: 60vh" />
-					</div>
+				<div>
+					<h2>Accordion Block</h2>
+					<img src="assets/accordion-html.png" alt="accordion html" style="width: 60vh" />
+				</div>
 
 
 			</section>
@@ -108,9 +109,11 @@
 			</section>
 			<section>
 				<h1>The JavaScript</h1>
-				<a class="small" href="https://github.com/bacoords/a11y-day-accordion-block/blob/main/src/accordion-block/view.js"><em>View the complete JavaScript code here.</em></a>
+				<a class="small"
+					href="https://github.com/bacoords/a11y-day-accordion-block/blob/main/src/accordion-block/view.js"><em>View
+						the complete JavaScript code here.</em></a>
 				<div class="flex">
-				<code class="screen-reader-only">
+					<code class="screen-reader-only">
 					/**
 					* Toggle the accordion item
 					* @param {HTMLElement} accordionHeader the button that controls the accordion
@@ -136,18 +139,20 @@
 					&#x9;accordionHeader.setAttribute( &#x27;aria-expanded&#x27;, ! isAccordionOpen );
 					}
 				</code>
-				<img src="assets/accordion-item-js.png" alt="accordion item js" style="max-width:40vh" />
-			</div>
+					<img src="assets/accordion-item-js.png" alt="accordion item js" style="max-width:40vh" />
+				</div>
 
 			</section>
 			<section>
 				<h1>The CSS</h1>
-				<a class="small" href="https://github.com/bacoords/a11y-day-accordion-block/blob/main/src/accordion-inner/style.scss"><em>View the complete styles here</em></a>
+				<a class="small"
+					href="https://github.com/bacoords/a11y-day-accordion-block/blob/main/src/accordion-inner/style.scss"><em>View
+						the complete styles here</em></a>
 				<div class="flex">
 					<div>
-					<h2>Header styles</h2>
-					<img src="assets/accordion-header-sass.png" alt="accordion section header css"
-						style="width: 40vh" />
+						<h2>Header styles</h2>
+						<img src="assets/accordion-header-sass.png" alt="accordion section header css"
+							style="width: 40vh" />
 						<code class="screen-reader-only">
 							.wp-block-a11y-day-accordion-heading {
 								&#x9;&#x9;background-color: var(--wp--preset--color--black);
@@ -209,7 +214,8 @@
 			</section>
 			<section>
 				<h1>Structuring the Inner Blocks</h1>
-				<img src="assets/accordion-block-edit.png" alt="accordion block structure with an editable section that has a heading and panel section">
+				<img src="assets/accordion-block-edit.png"
+					alt="accordion block structure with an editable section that has a heading and panel section">
 			</section>
 			<section data-background-color="#a1c69f">
 				<h1>Registering the parent and child blocks</h1>
@@ -261,22 +267,73 @@
 				</code>
 				<img src="assets/child-block-json.png" alt="child block json partial view" style="max-width:40vh">
 			</section>
-			<section>
+			<section data-transition="slide-in none">
 				<h1>InnerBlocks inside InnerBlocks</h1>
+				<p>The parent block:</p>
+				<img class="" src="assets/parent-block-edit.png" alt="the edit function of the accordion parent block">
+
+
+			</section>
+			<section data-transition="none slide-out">
+				<h1>InnerBlocks inside InnerBlocks</h1>
+				<p>The child block:</p>
+				<img src="assets/child-block-edit.png" alt="the return function of the accordion section child block"
+					style="max-width:38vh">
 			</section>
 			<section>
 				<h1>Editor Accessibility Tweaks</h1>
+
+				<p>Listen for the global <code>Add Block</code> keyboard shortcut when the <code>RichText</code>
+					component is focussed.</p>
+				<img src="assets/child-accordion-toolbar.png"
+					alt="screenshot of the child accordion section toolbar showing the keyboard shortcut for inserting a new block">
 			</section>
 			<section>
 				<h1>Editor CSS</h1>
+
+				<p>Apply the button styles and toggle animation to the heading <code>div</code></p>
+
+				<code class="screen-reader-only">
+					.wp-block-a11y-day-accordion-inner-block {
+						&#x9;.wp-block-a11y-day-accordion-heading {
+						&#x9;&#x9;display: flex;
+						&#x9;&#x9;align-items: center;
+						&#x9;&#x9;justify-content: space-between;
+						&#x9;&#x9;&#x26;::after {
+						&#x9;&#x9;&#x9;content: &#x22;&#x25B6;&#x22;;
+						&#x9;&#x9;&#x9;font-size: 0.25em;
+						&#x9;&#x9;&#x9;transition: all 300ms ease;
+						&#x9;&#x9;&#x9;display: inline-block;
+						&#x9;&#x9;&#x9;margin-right: 0.5em;
+						&#x9;&#x9;}
+						&#x9;}
+						&#x9;&#x26;.is-selected {
+						&#x9;&#x9;.wp-block-a11y-day-accordion-heading {
+						&#x9;&#x9;&#x9;&#x26;::after {
+						&#x9;&#x9;&#x9;&#x9;transform: rotate(90deg);
+						&#x9;&#x9;&#x9;}
+						&#x9;&#x9;}
+						&#x9;}
+						}
+				</code>
+				<img src="assets/child-block-edit-sass.png" alt="child block sass" style="max-width:28vh">
 			</section>
 			<section>
 				<h1>Thank you!</h1>
 				<ul class="card-list">
-				<li><p>Try out the block yourself:</p> <a href="https://aurooba.com/a11y-day-sandbox">https://aurooba.com/a11y-day-sandbox</a></li>
-				<li><p>View the code:</p> <a href="https://github.com/bacoords/a11y-day-accordion-block">https://github.com/bacoords/a11y-day-accordion-block</a></li>
-				<li><p>View the slides:</p> <a href="https://bacoords.github.io/a11y-day-accordion-block/presentation.html">https://bacoords.github.io/a11y-day-accordion-block/presentation.html</a></li>
-			</ul>
+					<li>
+						<p>Try out the block yourself:</p> <a
+							href="https://aurooba.com/a11y-day-sandbox">https://aurooba.com/a11y-day-sandbox</a>
+					</li>
+					<li>
+						<p>View the code:</p> <a
+							href="https://github.com/bacoords/a11y-day-accordion-block">https://github.com/bacoords/a11y-day-accordion-block</a>
+					</li>
+					<li>
+						<p>View the slides:</p> <a
+							href="https://bacoords.github.io/a11y-day-accordion-block/presentation.html">https://bacoords.github.io/a11y-day-accordion-block/presentation.html</a>
+					</li>
+				</ul>
 			</section>
 		</div>
 	</div>
