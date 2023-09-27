@@ -45,9 +45,6 @@
 .reveal section {
   text-align: left;
 }
-.reveal .feature-slide {
-  background-color: var(--highlight);
-}
 .reveal .title-slide .colophon img,
 .reveal .feature-slide .colophon img {
   max-width: 100px;

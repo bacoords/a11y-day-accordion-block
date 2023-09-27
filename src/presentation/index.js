@@ -8,4 +8,6 @@ import "./style.scss";
 let deck = new Reveal({
 	plugins: [Notes],
 });
-deck.initialize();
+deck.initialize({
+	autoAnimate: false
+});

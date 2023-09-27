@@ -23,7 +23,9 @@ __webpack_require__.r(__webpack_exports__);
 let deck = new reveal_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
   plugins: [reveal_js_plugin_notes_notes_esm_js__WEBPACK_IMPORTED_MODULE_1__["default"]]
 });
-deck.initialize();
+deck.initialize({
+  autoAnimate: false
+});
 
 /***/ }),
 
