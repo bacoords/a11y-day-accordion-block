@@ -66,6 +66,22 @@
 .reveal .flex h2 {
   margin: 0;
 }
+.reveal .card-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+}
+.reveal .card-list li {
+  margin: 0;
+  background-color: var(--light);
+  padding: 1rem;
+}
+.reveal .card-list li a {
+  word-break: break-all;
+}
 .reveal .authors {
   margin-top: 5rem;
   display: flex;

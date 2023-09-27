@@ -85,6 +85,25 @@
 			margin: 0;
 		}
 	}
+	.card-list {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+		padding: 0;
+		gap: 1rem;
+
+		li {
+			margin: 0;
+			background-color: var(--light);
+			padding: 1rem;
+			// max-width: 20vw;
+			// width: 20%;
+			a {
+				word-break: break-all;
+			}
+		}
+	}
 	.authors {
 		margin-top: 5rem;
 		display: flex;
