@@ -27,6 +27,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0.1em;
 }
 .wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading button::after {
   content: "▶";
