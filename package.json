@@ -1,8 +1,8 @@
 {
 	"name": "a11y-day-accordion-block",
 	"version": "0.1.0",
-	"description": "Example block scaffolded with Create Block tool.",
-	"author": "The WordPress Contributors",
+	"description": "An accessible accordion block built for WP Accessibility Day 2023.",
+	"author": "Aurooba Ahmed & Brian Coords",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
