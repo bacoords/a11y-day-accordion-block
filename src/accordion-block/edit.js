@@ -33,8 +33,8 @@ export default function Edit() {
 	// Set up our block props and innerblocks props.
 	const blockProps = useBlockProps();
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
-		allowedBlocks: [ 'a11y-day/accordion-inner-block' ],
-		template: [ [ 'a11y-day/accordion-inner-block' ] ],
+		allowedBlocks: [ 'a11y-day/accordion-section' ],
+		template: [ [ 'a11y-day/accordion-section' ] ],
 		templateInsertUpdatesSelection: true,
 	} );
 

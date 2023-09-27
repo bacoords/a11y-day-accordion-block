@@ -1,0 +1,409 @@
+<html>
+
+<head>
+	<link rel="stylesheet" href="build/presentation/index.css">
+	<link rel="stylesheet" href="build/presentation/style-index.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section class="title-slide">
+				<div class="colophon">
+					<img src="assets/wpa11ydaylogo.png" alt="WP Accessibility Day 2023 logo" />
+				</div>
+				<h1>A Recipe for an <em>Accessible</em> Accordion Block</h1>
+				<div class="authors">
+					<img src="assets/aurooba-brian-avatars.png" alt="headshots of Aurooba Ahmed and Brian Coords" />
+					<p>By <a href="https://aurooba.com">Aurooba Ahmed</a> & <a href="https://briancoords.com">Brian
+							Coords</a></p>
+				</div>
+
+				<aside class="notes">
+					Shhh, these are your private notes 📝
+				</aside>
+			</section>
+			<section class="feature-slide" data-background-color="#a1c69f">
+				<h1>What we'll be covering</h1>
+				<ul>
+					<li>What is an accordion?</li>
+					<li>The Accessible Accordion Rubric</li>
+					<li>Block Code walkthrough</li>
+				</ul>
+
+			</section>
+			<section>
+				<h1>What is an accordion?</h1>
+				<p>An accordion is a set of collapsible panels that can be used to hide and show content.</p>
+				<img class="fragment" src="assets/accordion-animation.gif" alt="accordion animation"
+					style="width: 400px" />
+			</section>
+			<section>
+				<h1>What about the details element?</h1>
+				<details open>
+					<summary>Is this an accordion?</summary>
+					<div class="details-inner">
+						<p>Nope! A semantic accordion doesn't exist yet.</p>
+					</div>
+
+				</details>
+				<details>
+					<summary>This is another details element.</summary>
+					<div class="details-inner">
+						<p>I operate independently of any other details element on the page.</p>
+					</div>
+				</details>
+			</section>
+			<section class="feature-slide" data-background-color="#a1c69f">
+				<h1>The Accessible Accordion Rubric</h1>
+				<p>There are 4 main criteria for an accessible accordion.</p>
+			</section>
+			<section class="feature-slide">
+				<ul class="checkmark-list">
+					<li>
+						<h2>Keyboard operable</h2>
+						<p>Can you navigate between the accordion sections and their panels with your keyboard?</p>
+					</li>
+				</ul>
+			</section>
+			<section class="feature-slide">
+				<ul class="checkmark-list">
+					<li>
+						<h2>Assistive device accessible and navigable</h2>
+						<p>Can screen readers and other assistive devices navigate and communicate the list of accordion
+							sections available?</p>
+					</li>
+				</ul>
+			</section>
+			<section class="feature-slide">
+				<ul class="checkmark-list">
+					<li>
+						<h2>Responsive</h2>
+						<p>Does the accordion function well regardless of screen size?</p>
+					</li>
+				</ul>
+			</section>
+			<section class="feature-slide">
+				<ul class="checkmark-list">
+					<li>
+						<h2>Styled</h2>
+						<p>Does the accordion visually indicate collapsed content and suggest how to collapse expanded
+							content?
+						</p>
+					</li>
+				</ul>
+			</section>
+			<section class="feature-slide" data-background-color="#a1c69f">
+				<h1>What does an accessible accordion look like?</h1>
+			</section>
+			<section>
+				<h1>The HTML</h1>
+				<div>
+					<h2>Accordion Block</h2>
+					<img src="assets/accordion-html.png" alt="accordion html" style="width: 60vh" />
+				</div>
+
+
+			</section>
+			<section>
+				<h1>Accordion Section Markup</h1>
+				<img src="assets/accordion-section-html.png" alt="accordion html" style="max-width:40vh" />
+				<code class="screen-reader-only">
+								&#x3C;div class=&#x22;wp-block-a11y-day-accordion-section&#x22;&#x3E;
+								&#x3C;h2 className=&#x22;wp-block-a11y-day-accordion-heading&#x22;&#x3E;
+									&#x3C;button
+										type=&#x22;button&#x22;
+										aria-expanded=&#x22;false&#x22;
+										className=&#x22;accordion-trigger&#x22;
+										aria-controls=&#x22;section-1-content&#x22;
+										id=&#x22;section-1-heading&#x22;
+									&#x3E;
+										Accordion Section Header
+									&#x3C;/button&#x3E;
+								&#x3C;/h2&#x3E;
+								&#x3C;div
+									id=&#x22;section-1-content&#x22;
+									role=&#x22;region&#x22;
+									aria-labelledby=&#x22;section-1-heading&#x22;
+									className=&#x22;wp-block-a11y-day-accordion-panel&#x22;
+								&#x3E;
+									&#x3C;!-- hidden content lives here --&#x3E;
+								&#x3C;/div&#x3E;
+							&#x3C;/div&#x3E;
+						</code>
+			</section>
+			<section>
+				<h1>The JavaScript</h1>
+				<a class="small"
+					href="https://github.com/bacoords/a11y-day-accordion-block/blob/main/src/accordion-block/view.js"><em>View
+						the complete JavaScript code here.</em></a>
+				<div class="flex">
+					<code class="screen-reader-only">
+					/**
+					* Toggle the accordion item
+					* @param {HTMLElement} accordionHeader the button that controls the accordion
+					* @param {HTMLElement} panel the panel that is controlled by the accordion
+					* @param {HTMLElement} accordion the accordion item
+					* @param {NodeList} accordions all the accordions in the accordion block
+					*/
+					function toggleAccordionItem( accordionHeader, panel, accordion, accordions ) {
+					&#x9;isAccordionOpen =
+					&#x9;&#x9;accordionHeader.getAttribute( &#x27;aria-expanded&#x27; ) === &#x27;true&#x27;;
+					&#x9;if ( ! isAccordionOpen ) {
+					&#x9;&#x9;// Hide every panel but the one we want to show
+					&#x9;&#x9;accordions.forEach( ( accordion ) =&#x3E; {
+					&#x9;&#x9;&#x9;const { accordionHeader, accordionContent } =
+					&#x9;&#x9;&#x9;&#x9;accordionParts( accordion );
+					&#x9;&#x9;&#x9;if ( accordionContent !== panel ) {
+					&#x9;&#x9;&#x9;&#x9;toggleIsSelected( accordion, &#x27;remove&#x27; );
+					&#x9;&#x9;&#x9;&#x9;accordionHeader.setAttribute( &#x27;aria-expanded&#x27;, &#x27;false&#x27; );
+					&#x9;&#x9;&#x9;}
+					&#x9;&#x9;} );
+					&#x9;}
+					&#x9;toggleIsSelected( accordion, &#x27;toggle&#x27; );
+					&#x9;accordionHeader.setAttribute( &#x27;aria-expanded&#x27;, ! isAccordionOpen );
+					}
+				</code>
+					<img src="assets/accordion-item-js.png" alt="accordion item js" style="max-width:40vh" />
+				</div>
+
+			</section>
+			<section>
+				<h1>The CSS</h1>
+				<a class="small"
+					href="https://github.com/bacoords/a11y-day-accordion-block/blob/main/src/accordion-inner/style.scss"><em>View
+						the complete styles here</em></a>
+				<div class="flex">
+					<div>
+						<h2>Header styles</h2>
+						<img src="assets/accordion-header-sass.png" alt="accordion section header css"
+							style="width: 25vh" />
+						<code class="screen-reader-only">
+							.wp-block-a11y-day-accordion-heading {
+								&#x9;&#x9;background-color: var(--wp--preset--color--black);
+								&#x9;&#x9;color: var(--wp--preset--color--white);
+								&#x9;&#x9;margin: 0;
+
+								&#x9;&#x9;button {
+								&#x9;&#x9;&#x9;background-color: transparent;
+								&#x9;&#x9;&#x9;border: 0;
+								&#x9;&#x9;&#x9;border-radius: 0;
+								&#x9;&#x9;&#x9;width: 100%;
+								&#x9;&#x9;&#x9;font-size: inherit;
+								&#x9;&#x9;&#x9;text-align: inherit;
+								&#x9;&#x9;&#x9;cursor: pointer;
+								&#x9;&#x9;&#x9;color: var(--wp--preset--color--white);
+								&#x9;&#x9;&#x9;display: flex;
+								&#x9;&#x9;&#x9;justify-content: space-between;
+								&#x9;&#x9;&#x9;align-items: center;
+
+								&#x9;&#x9;&#x9;&#x26;::after {
+								&#x9;&#x9;&#x9;&#x9;content: &#x22;&#x25B6;&#x22;;
+								&#x9;&#x9;&#x9;&#x9;font-size: 0.25em;
+								&#x9;&#x9;&#x9;&#x9;transition: all 300ms ease;
+								&#x9;&#x9;&#x9;&#x9;display: inline-block;
+								&#x9;&#x9;&#x9;&#x9;margin-right: 0.5em;
+								&#x9;&#x9;&#x9;}
+
+								&#x9;&#x9;&#x9;&#x26;[aria-expanded=&#x22;true&#x22;] {
+								&#x9;&#x9;&#x9;&#x9;&#x26;::after {
+								&#x9;&#x9;&#x9;&#x9;&#x9;transform: rotate(90deg);
+								&#x9;&#x9;&#x9;&#x9;}
+								&#x9;&#x9;&#x9;}
+								&#x9;&#x9;}
+								&#x9;}
+						</code>
+					</div>
+					<div class="fragment">
+						<h2>Panel styles</h2>
+						<img src="assets/accordion-panel-sass.png" alt="accordion panel sass" style="width: 25vh"/>
+						<code class="screen-reader-only">
+							.wp-block-a11y-day-accordion-panel {
+								padding: calc(var(--wp--style--block-gap) / 2);
+								display: none;
+								transition: opacity 0.3s ease-in;
+							  }
+
+							  .wp-block-a11y-day-accordion-section.is-selected {
+								&#x3E; .wp-block-a11y-day-accordion-panel {
+								  display: block;
+								}
+							  }
+						</code>
+					</div>
+				</div>
+			</section>
+			<section class="feature-slide" data-background-color="#a1c69f">
+				<h1>What does an accessible accordion block editing experience look like?</h1>
+			</section>
+			<!-- <section>
+				<h1>Structuring the block</h1>
+				<img src="assets/accordion-block-preview.png" alt="accordion block structure with multiple sections">
+			</section> -->
+			<section>
+				<h1>The Block Structure</h1>
+				<img src="assets/accordion-block-edit.png"
+					alt="accordion block structure with an editable section that has a heading and panel section">
+			</section>
+			<section class="feature-slide" data-background-color="#a1c69f">
+				<h1>How does an accessible accordion block function in the editor? </h1>
+			</section>
+			<section data-background-color="#a1c69f">
+				<h1>Registering the parent and child blocks</h1>
+			</section>
+			<section>
+				<img src="assets/columns-block-screenshot.png" alt="screenshot of the columns block in the editor">
+			</section>
+			<section>
+				<h1>Registering the parent block</h1>
+				<div class="flex">
+					<div style="width: 50%;"> <code class="screen-reader-only">
+						{
+							// partial view of the block.json
+							&#x22;name&#x22;: &#x22;a11y-day/accordion-block&#x22;,
+							&#x22;title&#x22;: &#x22;Accordion&#x22;,
+							&#x22;attributes&#x22;: {
+							  &#x22;level&#x22;: {
+								&#x22;type&#x22;: &#x22;number&#x22;,
+								&#x22;default&#x22;: 3
+							  }
+							},
+							&#x22;providesContext&#x22;: {
+							  &#x22;a11yDay/level&#x22;: &#x22;level&#x22;
+							}
+						  }
+					</code>
+						<img src="assets/parent-block-json.png" alt="parent block json partial view"
+							style="max-width:30vh">
+					</div>
+					<div style="width: 50%;"><img style="max-width:35vh" class="" src="assets/parent-block-edit.png"
+							alt="the edit function of the accordion parent block"></div>
+				</div>
+
+			</section>
+			<section>
+				<h1>Registering the child block</h1>
+				<div class="flex">
+					<div style="width: 50%;">
+						<code class="screen-reader-only">
+							{
+								// partial view of the block.json
+								&#x22;name&#x22;: &#x22;a11y-day/accordion-inner-block&#x22;,
+								&#x22;title&#x22;: &#x22;Accordion Section&#x22;,
+								&#x22;parent&#x22;: [ &#x22;a11y-day/accordion-block&#x22; ],
+								&#x22;attributes&#x22;: {
+								  &#x22;heading&#x22;: {
+									&#x22;type&#x22;: &#x22;string&#x22;,
+									&#x22;selector&#x22;: &#x22;wp-block-a11y-day-accordion-heading&#x22;
+								  },
+								  &#x22;level&#x22;: {
+									&#x22;type&#x22;: &#x22;number&#x22;,
+									&#x22;default&#x22;: 3
+								  },
+								  &#x22;id&#x22;: {
+									&#x22;type&#x22;: &#x22;string&#x22;,
+									&#x22;default&#x22;: &#x22;&#x22;
+								  }
+								},
+								&#x22;usesContext&#x22;: [ &#x22;a11yDay/level&#x22; ]
+							  }
+						</code>
+						<img src="assets/child-block-json.png" alt="child block json partial view"
+							style="max-width:30vh">
+					</div>
+					<div style="width: 50%;">
+						<img src="assets/child-block-edit.png"
+							alt="the return function of the accordion section child block" style="max-width:35vh">
+					</div>
+				</div>
+
+			</section>
+			<!-- <section data-transition="slide-in none">
+				<h1>InnerBlocks inside InnerBlocks</h1>
+				<p>The parent block:</p>
+				<img class="" src="assets/parent-block-edit.png" alt="the edit function of the accordion parent block">
+
+
+			</section>
+			<section data-transition="none slide-out">
+				<h1>InnerBlocks inside InnerBlocks</h1>
+				<p>The child block:</p>
+				<img src="assets/child-block-edit.png" alt="the return function of the accordion section child block"
+					style="max-width:38vh">
+			</section> -->
+			<section>
+				<h1>Editor Accessibility Tweaks</h1>
+
+				<p>Listen for the global <code>Add Block</code> keyboard shortcut when the <code>RichText</code>
+					component is focussed.</p>
+				<img src="assets/child-accordion-toolbar.png"
+					alt="screenshot of the child accordion section toolbar showing the keyboard shortcut for inserting a new block">
+			</section>
+			<section>
+				<h1>Editor CSS</h1>
+
+				<p>Apply the button styles and toggle animation to the heading <code>div</code></p>
+
+				<code class="screen-reader-only">
+					.wp-block-a11y-day-accordion-inner-block {
+						&#x9;.wp-block-a11y-day-accordion-heading {
+						&#x9;&#x9;display: flex;
+						&#x9;&#x9;align-items: center;
+						&#x9;&#x9;justify-content: space-between;
+						&#x9;&#x9;&#x26;::after {
+						&#x9;&#x9;&#x9;content: &#x22;&#x25B6;&#x22;;
+						&#x9;&#x9;&#x9;font-size: 0.25em;
+						&#x9;&#x9;&#x9;transition: all 300ms ease;
+						&#x9;&#x9;&#x9;display: inline-block;
+						&#x9;&#x9;&#x9;margin-right: 0.5em;
+						&#x9;&#x9;}
+						&#x9;}
+						&#x9;&#x26;.is-selected {
+						&#x9;&#x9;.wp-block-a11y-day-accordion-heading {
+						&#x9;&#x9;&#x9;&#x26;::after {
+						&#x9;&#x9;&#x9;&#x9;transform: rotate(90deg);
+						&#x9;&#x9;&#x9;}
+						&#x9;&#x9;}
+						&#x9;}
+						}
+				</code>
+				<img src="assets/child-block-edit-sass.png" alt="child block sass" style="max-width:28vh">
+			</section>
+			<section data-background-color="#a1c69f">
+				<h1>Accordion accessibility is important</h1>
+				<div class="flex equal-cols">
+					<figure>
+						<img src="assets/accordion-example.png" alt="screenshot of the accordion block front end">
+						<figcaption>Accordion on the front end</figcaption>
+					</figure>
+
+					<figure>
+						<img src="assets/accordion-editor.png" alt="screenshot of the accordion block in the editor">
+						<figcaption>Accordion Block in the editor</figcaption>
+					</figure>
+
+				</div>
+			</section>
+			<section>
+				<h1>Thank you!</h1>
+				<ul class="card-list">
+					<li>
+						<p>Try out the block yourself:</p> <a
+							href="https://aurooba.com/a11y-day-sandbox">https://aurooba.com/a11y-day-sandbox</a>
+					</li>
+					<li>
+						<p>View the code:</p> <a
+							href="https://github.com/bacoords/a11y-day-accordion-block">https://github.com/bacoords/a11y-day-accordion-block</a>
+					</li>
+					<li>
+						<p>View the slides:</p> <a
+							href="https://bacoords.github.io/a11y-day-accordion-block/presentation.html">https://bacoords.github.io/a11y-day-accordion-block/presentation.html</a>
+					</li>
+				</ul>
+			</section>
+		</div>
+	</div>
+	<script src="build/presentation/index.js"></script>
+</body>
+
+</html>

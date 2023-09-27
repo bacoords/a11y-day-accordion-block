@@ -1,0 +1,213 @@
+// Exposes theme's variables for easy re-use in CSS for plugin authors
+
+// register font from font folder called lexend
+@font-face {
+	font-family: "Lexend";
+	src: url("fonts/lexend-regular.woff2");
+	font-weight: normal;
+	font-style: normal;
+}
+
+// register font from font folder dmserifdisplay-regular-webfont.woff2
+@font-face {
+	font-family: "DM Serif Display";
+	src: url("fonts/dmserifdisplay-regular-webfont.woff2");
+	font-weight: normal;
+	font-style: normal;
+}
+
+:root {
+	--foreground: #000;
+	--highlight: #a1c69f;
+	--secondary: #daa6ba;
+	--light: #e7e7e8;
+	--r-background-color: #f7f5f7;
+	--r-main-font: "Lexend", sans-serif;
+	--r-main-font-size: clamp(1.2rem, calc(1.07rem + 0.63vw), 1.56rem);
+	--r-main-color: var(--foreground);
+	// --r-block-margin: #{$blockMargin};
+	// --r-heading-margin: #{$headingMargin};
+	--r-heading-font: "DM Serif Display", serif;
+	--r-heading-color: var(--foreground);
+	// --r-heading-line-height: #{$headingLineHeight};
+	// --r-heading-letter-spacing: #{$headingLetterSpacing};
+	// --r-heading-text-transform: #{$headingTextTransform};
+	// --r-heading-text-shadow: #{$headingTextShadow};
+	// --r-heading-font-weight: #{$headingFontWeight};
+	// --r-heading1-text-shadow: #{$heading1TextShadow};
+	--r-heading1-size: clamp(2.49rem, calc(2.03rem + 2.31vw), 3.82rem);
+	--r-heading2-size: clamp(2.01rem, calc(1.6rem + 1.7vw), 3rem);
+	--r-heading3-size: clamp(1.73rem, calc(1.48rem + 1.24vw), 2.44rem);
+	--r-heading4-size: clamp(1.44rem, calc(1.26rem + 0.89vw), 1.95rem);
+	--small-size: clamp(0.83rem, calc(0.78rem + 0.29vw), 1rem);
+	// --r-code-font: #{$codeFont};
+	--r-link-color: var(--foreground);
+	// --r-link-color-dark: #{darken($linkColor , 15% )};
+	--r-link-color-hover: var(--foreground);
+	--r-selection-background-color: var(--secondary);
+	--r-selection-color: var(--foreground);
+}
+
+.reveal {
+	a {
+		border-bottom: 2px solid var(--highlight);
+		transition: 0.5s ease all;
+		&:hover {
+			border-bottom: 2px solid var(--foreground);
+		}
+	}
+	section {
+		text-align: left;
+	}
+
+	.title-slide,
+	.feature-slide {
+		.colophon {
+			img {
+				max-width: 100px;
+			}
+		}
+	}
+	.screen-reader-only {
+		position: absolute;
+		left: -10000px;
+		top: auto;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
+	.flex {
+		display: flex;
+		align-items: start;
+		gap: 1rem;
+		margin-top: 1rem;
+		h2 {
+			margin: 0;
+		}
+	}
+	.card-list {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+		padding: 0;
+		gap: 1rem;
+
+		li {
+			margin: 0;
+			background-color: var(--light);
+			padding: 1rem;
+			// max-width: 20vw;
+			// width: 20%;
+			a {
+				word-break: break-all;
+			}
+		}
+	}
+	.authors {
+		margin-top: 5rem;
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+		font-size: var(--small-size);
+		img {
+			max-width: 150px;
+		}
+		& > * {
+			margin: 0;
+		}
+	}
+	.small {
+		font-size: var(--small-size);
+	}
+	ul {
+		margin-left: 0;
+		> * + * {
+			margin-top: 1rem;
+			// border-top: 2px solid var(--highlight);
+			// padding-top: 1rem;
+		}
+		&.checkmark-list {
+			list-style: none;
+			li {
+				@extend .checkmark;
+
+			}
+		}
+	}
+	.fragment-stack {
+		position: relative;
+		& > * {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
+	}
+	.note {
+		font-style: italic;
+		border: 1px solid grey;
+		padding: 1rem;
+	}
+	p {
+		max-width: 45ch;
+		&:first-child{
+			margin-top: 0;
+		}
+	}
+	details {
+		border: 1px dotted var(--foreground);
+
+		margin-bottom: 1rem;
+		summary {
+			background-color: var(--highlight);
+			padding: 0 0.1em;
+		}
+		.details-inner {
+			padding: 1rem 0.1em;
+		}
+	}
+	table {
+		color: #fff;
+	}
+	.equal-cols {
+		& > * {
+			width: 50%;
+		}
+		figure {
+			margin: 0;
+			img {
+				border-radius: 3px;
+			}
+			figcaption {
+				font-size: var(--small-size);
+				font-style: italic;
+				margin-top: -0.5em;
+				text-align: center;
+				text-decoration: dotted underline;
+			}
+		}
+	}
+}
+
+.checkmark {
+	// use as a class or as @extend
+	position: relative;
+	padding-left: 0.8em;
+	&::before {
+		content: "";
+		display: inline-block;
+		position: absolute;
+		left: -0.5em;
+		top: 0.5em;
+		transform: rotate(45deg);
+		height: 1em;
+		width: 0.5em;
+		border-bottom: 0.15em solid;
+		border-right: 0.15em solid;
+	}
+	&:is(li) {
+		&:not(:first-child) {
+			margin-top: 1em;
+		}
+	}
+}

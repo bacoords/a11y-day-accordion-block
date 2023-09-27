@@ -5,7 +5,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
 	accordionContainers.forEach( ( accordionContainer ) => {
 		const accordions = accordionContainer.querySelectorAll(
-			':scope > .wp-block-a11y-day-accordion-inner-block'
+			':scope > .wp-block-a11y-day-accordion-section'
 		);
 		// Add event listeners to all accordions and toggle them on click
 		accordions.forEach( ( accordion ) => {

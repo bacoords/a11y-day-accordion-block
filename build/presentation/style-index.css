@@ -1,0 +1,181 @@
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/presentation/style.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+@font-face {
+  font-family: "Lexend";
+  src: url(../fonts/lexend-regular.d7da848a.woff2);
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DM Serif Display";
+  src: url(../fonts/dmserifdisplay-regular-webfont.b8b1eeb1.woff2);
+  font-weight: normal;
+  font-style: normal;
+}
+:root {
+  --foreground: #000;
+  --highlight: #a1c69f;
+  --secondary: #daa6ba;
+  --light: #e7e7e8;
+  --r-background-color: #f7f5f7;
+  --r-main-font: "Lexend", sans-serif;
+  --r-main-font-size: clamp(1.2rem, calc(1.07rem + 0.63vw), 1.56rem);
+  --r-main-color: var(--foreground);
+  --r-heading-font: "DM Serif Display", serif;
+  --r-heading-color: var(--foreground);
+  --r-heading1-size: clamp(2.49rem, calc(2.03rem + 2.31vw), 3.82rem);
+  --r-heading2-size: clamp(2.01rem, calc(1.6rem + 1.7vw), 3rem);
+  --r-heading3-size: clamp(1.73rem, calc(1.48rem + 1.24vw), 2.44rem);
+  --r-heading4-size: clamp(1.44rem, calc(1.26rem + 0.89vw), 1.95rem);
+  --small-size: clamp(0.83rem, calc(0.78rem + 0.29vw), 1rem);
+  --r-link-color: var(--foreground);
+  --r-link-color-hover: var(--foreground);
+  --r-selection-background-color: var(--secondary);
+  --r-selection-color: var(--foreground);
+}
+
+.reveal a {
+  border-bottom: 2px solid var(--highlight);
+  transition: 0.5s ease all;
+}
+.reveal a:hover {
+  border-bottom: 2px solid var(--foreground);
+}
+.reveal section {
+  text-align: left;
+}
+.reveal .title-slide .colophon img,
+.reveal .feature-slide .colophon img {
+  max-width: 100px;
+}
+.reveal .screen-reader-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.reveal .flex {
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.reveal .flex h2 {
+  margin: 0;
+}
+.reveal .card-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+}
+.reveal .card-list li {
+  margin: 0;
+  background-color: var(--light);
+  padding: 1rem;
+}
+.reveal .card-list li a {
+  word-break: break-all;
+}
+.reveal .authors {
+  margin-top: 5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: var(--small-size);
+}
+.reveal .authors img {
+  max-width: 150px;
+}
+.reveal .authors > * {
+  margin: 0;
+}
+.reveal .small {
+  font-size: var(--small-size);
+}
+.reveal ul {
+  margin-left: 0;
+}
+.reveal ul > * + * {
+  margin-top: 1rem;
+}
+.reveal ul.checkmark-list {
+  list-style: none;
+}
+.reveal .fragment-stack {
+  position: relative;
+}
+.reveal .fragment-stack > * {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.reveal .note {
+  font-style: italic;
+  border: 1px solid grey;
+  padding: 1rem;
+}
+.reveal p {
+  max-width: 45ch;
+}
+.reveal p:first-child {
+  margin-top: 0;
+}
+.reveal details {
+  border: 1px dotted var(--foreground);
+  margin-bottom: 1rem;
+}
+.reveal details summary {
+  background-color: var(--highlight);
+  padding: 0 0.1em;
+}
+.reveal details .details-inner {
+  padding: 1rem 0.1em;
+}
+.reveal table {
+  color: #fff;
+}
+.reveal .equal-cols > * {
+  width: 50%;
+}
+.reveal .equal-cols figure {
+  margin: 0;
+}
+.reveal .equal-cols figure img {
+  border-radius: 3px;
+}
+.reveal .equal-cols figure figcaption {
+  font-size: var(--small-size);
+  font-style: italic;
+  margin-top: -0.5em;
+  text-align: center;
+  -webkit-text-decoration: dotted underline;
+          text-decoration: dotted underline;
+}
+
+.checkmark, .reveal ul.checkmark-list li {
+  position: relative;
+  padding-left: 0.8em;
+}
+.checkmark::before, .reveal ul.checkmark-list li::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: -0.5em;
+  top: 0.5em;
+  transform: rotate(45deg);
+  height: 1em;
+  width: 0.5em;
+  border-bottom: 0.15em solid;
+  border-right: 0.15em solid;
+}
+.checkmark:is(li):not(:first-child), .reveal ul.checkmark-list li:is(li):not(:first-child) {
+  margin-top: 1em;
+}
+
+/*# sourceMappingURL=style-index.css.map*/
