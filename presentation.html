@@ -312,8 +312,35 @@
 							style="max-width:30vh">
 					</div>
 					<div style="width: 50%;">
+						<code class="screen-reader-only">
+							export default function save( { attributes } ) {
+								&#x9;const TagName = &#x27;h&#x27; + attributes.level;
+								&#x9;return (
+								&#x9;&#x9;&#x3C;div { ...useBlockProps.save() }&#x3E;
+								&#x9;&#x9;&#x9;&#x3C;TagName className=&#x22;wp-block-a11y-day-accordion-heading&#x22;&#x3E;
+								&#x9;&#x9;&#x9;&#x9;&#x3C;button
+								&#x9;&#x9;&#x9;&#x9;&#x9;type=&#x22;button&#x22;
+								&#x9;&#x9;&#x9;&#x9;&#x9;aria-expanded=&#x22;false&#x22;
+								&#x9;&#x9;&#x9;&#x9;&#x9;className=&#x22;accordion-trigger&#x22;
+								&#x9;&#x9;&#x9;&#x9;&#x9;aria-controls={ &#x60;${ attributes.id }-content&#x60; }
+								&#x9;&#x9;&#x9;&#x9;&#x9;id={ &#x60;${ attributes.id }-heading&#x60; }
+								&#x9;&#x9;&#x9;&#x9;&#x9;dangerouslySetInnerHTML={ { __html: attributes.heading } }
+								&#x9;&#x9;&#x9;&#x9;&#x3E;&#x3C;/button&#x3E;
+								&#x9;&#x9;&#x9;&#x3C;/TagName&#x3E;
+								&#x9;&#x9;&#x9;&#x3C;div
+								&#x9;&#x9;&#x9;&#x9;id={ &#x60;${ attributes.id }-content&#x60; }
+								&#x9;&#x9;&#x9;&#x9;role=&#x22;region&#x22;
+								&#x9;&#x9;&#x9;&#x9;aria-labelledby={ &#x60;${ attributes.id }-heading&#x60; }
+								&#x9;&#x9;&#x9;&#x9;className=&#x22;wp-block-a11y-day-accordion-panel&#x22;
+								&#x9;&#x9;&#x9;&#x3E;
+								&#x9;&#x9;&#x9;&#x9;&#x3C;div { ...useInnerBlocksProps.save() } /&#x3E;
+								&#x9;&#x9;&#x9;&#x3C;/div&#x3E;
+								&#x9;&#x9;&#x3C;/div&#x3E;
+								&#x9;);
+								}
+						</code>
 						<img src="assets/child-block-edit.png"
-							alt="the return function of the accordion section child block" style="max-width:35vh">
+							alt="the save function of the accordion section child block" style="max-width:35vh">
 					</div>
 				</div>
 
