@@ -88,14 +88,6 @@
 
 			</section>
 			<section>
-				<h2>Accordion Section HTML</h2>
-
-
-						<img src="assets/accordion-section-html.png" alt="accordion html" style="width: 40vh" />
-
-
-			</section>
-			<section>
 				<h1>Accordion Section Markup</h1>
 				<img src="assets/accordion-section-html.png" alt="accordion html" style="max-width:40vh" />
 				<code class="screen-reader-only">
@@ -221,9 +213,61 @@
 			</section>
 			<section>
 				<h1>Structuring the block</h1>
+				<img src="assets/accordion-block-preview.png" alt="accordion block structure with multiple sections">
 			</section>
 			<section>
+				<h1>Structuring the Inner Blocks</h1>
+				<img src="assets/accordion-block-edit.png" alt="accordion block structure with an editable section that has a heading and panel section">
+			</section>
+			<section data-background-color="#a1c69f">
 				<h1>Registering the parent and child blocks</h1>
+			</section>
+			<section>
+				<h1>Registering the parent block</h1>
+				<code class="screen-reader-only">
+					{
+						// partial view of the block.json
+						&#x22;name&#x22;: &#x22;a11y-day/accordion-block&#x22;,
+						&#x22;title&#x22;: &#x22;Accordion&#x22;,
+						&#x22;attributes&#x22;: {
+						  &#x22;level&#x22;: {
+							&#x22;type&#x22;: &#x22;number&#x22;,
+							&#x22;default&#x22;: 3
+						  }
+						},
+						&#x22;providesContext&#x22;: {
+						  &#x22;a11yDay/level&#x22;: &#x22;level&#x22;
+						}
+					  }
+				</code>
+				<img src="assets/parent-block-json.png" alt="parent block json partial view" style="max-width:40vh">
+			</section>
+			<section>
+				<h1>Registering the child block</h1>
+				<code class="screen-reader-only">
+					{
+						// partial view of the block.json
+						&#x22;name&#x22;: &#x22;a11y-day/accordion-inner-block&#x22;,
+						&#x22;title&#x22;: &#x22;Accordion Section&#x22;,
+						&#x22;parent&#x22;: [ &#x22;a11y-day/accordion-block&#x22; ],
+						&#x22;attributes&#x22;: {
+						  &#x22;heading&#x22;: {
+							&#x22;type&#x22;: &#x22;string&#x22;,
+							&#x22;selector&#x22;: &#x22;wp-block-a11y-day-accordion-heading&#x22;
+						  },
+						  &#x22;level&#x22;: {
+							&#x22;type&#x22;: &#x22;number&#x22;,
+							&#x22;default&#x22;: 3
+						  },
+						  &#x22;id&#x22;: {
+							&#x22;type&#x22;: &#x22;string&#x22;,
+							&#x22;default&#x22;: &#x22;&#x22;
+						  }
+						},
+						&#x22;usesContext&#x22;: [ &#x22;a11yDay/level&#x22; ]
+					  }
+				</code>
+				<img src="assets/child-block-json.png" alt="child block json partial view" style="max-width:40vh">
 			</section>
 			<section>
 				<h1>InnerBlocks inside InnerBlocks</h1>
