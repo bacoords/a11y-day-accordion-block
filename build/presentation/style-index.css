@@ -123,17 +123,25 @@
 .reveal p {
   max-width: 45ch;
 }
+.reveal p:first-child {
+  margin-top: 0;
+}
 .reveal .equal-cols > * {
   width: 50%;
 }
 .reveal .equal-cols figure {
   margin: 0;
 }
+.reveal .equal-cols figure img {
+  border-radius: 3px;
+}
 .reveal .equal-cols figure figcaption {
   font-size: var(--small-size);
   font-style: italic;
   margin-top: -0.5em;
   text-align: center;
+  -webkit-text-decoration: dotted underline;
+          text-decoration: dotted underline;
 }
 
 .checkmark, .reveal ul.checkmark-list li {

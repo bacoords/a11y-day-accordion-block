@@ -150,6 +150,9 @@
 	}
 	p {
 		max-width: 45ch;
+		&:first-child{
+			margin-top: 0;
+		}
 	}
 	.equal-cols {
 		& > * {
@@ -157,11 +160,15 @@
 		}
 		figure {
 			margin: 0;
+			img {
+				border-radius: 3px;
+			}
 			figcaption {
 				font-size: var(--small-size);
 				font-style: italic;
 				margin-top: -0.5em;
 				text-align: center;
+				text-decoration: dotted underline;
 			}
 		}
 	}
