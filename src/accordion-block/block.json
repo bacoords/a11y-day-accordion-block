@@ -5,12 +5,21 @@
 	"version": "0.1.0",
 	"title": "Accordion",
 	"category": "widgets",
-	"icon": "smiley",
-	"description": "Example block scaffolded with Create Block tool.",
+	"icon": "sort",
+	"description": "Container block to hold multiple accordion sections.",
 	"example": {},
 	"supports": {
 		"html": false
 	},
+	"attributes": {
+		"level": {
+			"type": "number",
+			"default": 3
+		}
+	},
+	"providesContext": {
+		"a11yDay/level": "level"
+    },
 	"textdomain": "accordion-block",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

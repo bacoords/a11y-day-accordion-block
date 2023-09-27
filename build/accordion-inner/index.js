@@ -2,6 +2,33 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./node_modules/@wordpress/icons/build-module/library/plus.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/plus.js ***!
+  \********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * WordPress dependencies
+ */
+
+const plus = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  d: "M18 11.2h-5.2V6h-1.6v5.2H6v1.6h5.2V18h1.6v-5.2H18z"
+}));
+/* harmony default export */ __webpack_exports__["default"] = (plus);
+//# sourceMappingURL=plus.js.map
+
+/***/ }),
+
 /***/ "./src/accordion-inner/edit.js":
 /*!*************************************!*\
   !*** ./src/accordion-inner/edit.js ***!
@@ -18,7 +45,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.scss */ "./src/accordion-inner/editor.scss");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/plus.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/accordion-inner/editor.scss");
 
 /**
  * Retrieves the translation of text.
@@ -34,6 +68,14 @@ __webpack_require__.r(__webpack_exports__);
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 
+
+
+
+
+
+const TEMPLATE = [['core/paragraph', {
+  placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Type / to add a hidden block')
+}]];
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -51,10 +93,155 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @return {WPElement} Element to render.
  */
-function Edit() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)()
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Accordion Block – hello from the editor!', 'accordion-block'));
+function Edit({
+  attributes,
+  setAttributes,
+  clientId,
+  context,
+  name
+}) {
+  // Set up our block props and innerblocks props.
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
+  const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useInnerBlocksProps)({}, {
+    template: TEMPLATE
+  });
+
+  // Get the heading level and set up a local state for it
+  const [level, setLevel] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.level);
+
+  // Get the heading text and set up a local state for it
+  const [heading, setHeading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.heading);
+
+  // Convert our heading level into a proper heading tag name
+  const [tagName, setTagName] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('h' + attributes.level);
+
+  // Get the clientId of the root block so we can update its level attribute
+  const {
+    rootClientId
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
+    const {
+      getBlockRootClientId
+    } = select(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.store);
+    const rootId = getBlockRootClientId(clientId);
+    return {
+      rootClientId: rootId
+    };
+  }, [clientId]);
+
+  // Get the dispatch function so we can update the root block's level attribute and insert a new block
+  const {
+    updateBlockAttributes,
+    insertBlock
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useDispatch)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.store);
+
+  // Handler for when the heading text is updated
+  const updateHeading = value => {
+    // Update the block's heading attribute.
+    setAttributes({
+      heading: value
+    });
+
+    // Update the local state for the heading text.
+    setHeading(value);
+  };
+
+  // Handler for when the heading level is updated
+  const updateLevel = value => {
+    // Update the parent block's level attribute.
+    updateBlockAttributes(rootClientId, {
+      level: value
+    });
+  };
+  const updateLevelLocal = value => {
+    // Update the block's level attribute.
+    setAttributes({
+      level: value
+    });
+
+    // Update the local state for the heading level.
+    setLevel(value);
+
+    // Update the local state for the heading tag name.
+    setTagName('h' + value);
+  };
+
+  // This is a hook that is used to set the block's clientId as an attribute.
+  // We're using this to set the block's ID attribute so that each accordion
+  // section has a unique ID.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    setAttributes({
+      id: clientId
+    });
+  }, [clientId]);
+
+  // This is a hook that is used to set the block's level if it changes in the
+  // parent block. For example, if another accordion section changes the level
+  // of the accordion, this hook will update the level of this section.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    updateLevelLocal(context['a11yDay/level']);
+  }, [context['a11yDay/level']]);
+
+  // Get the parent block's clientId and innerBlocks so we can insert a new
+  // block after this one.
+  const {
+    parentClientId,
+    parentinnerBlocks
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
+    const {
+      getBlockParents,
+      getSelectedBlockClientId
+    } = select(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.store);
+    const selectedBlockClientId = getSelectedBlockClientId();
+    const parents = getBlockParents(selectedBlockClientId);
+    const firstParentClientId = parents[parents.length - 1];
+    return {
+      parentClientId: firstParentClientId,
+      parentinnerBlocks: select('core/block-editor').getBlocks(firstParentClientId)
+    };
+  }, []);
+
+  // Get the current block's position in the parent block's innerBlocks array
+  function getCurrentBlockPosition(block) {
+    return block.clientId === clientId;
+  }
+
+  // Insert a new Accordion Section block after this one
+  const appendNewSection = () => {
+    // first we programmatically create a new Accordion Section block
+    const block = (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__.createBlock)(name);
+    // then we insert it after this block by finding this block's position and adding 1
+    insertBlock(block, parentinnerBlocks.findIndex(getCurrentBlockPosition) + 1, parentClientId);
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    ...blockProps
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.HeadingLevelDropdown, {
+    value: level,
+    onChange: updateLevel
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarButton, {
+    onClick: appendNewSection,
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"],
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Append a new accordion section ( ⌥/Alt + ⌘/Ctrl + Y )', 'accordion-block')
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.KeyboardShortcuts
+  // Bind keyboard shortcuts for appending a new section, and listen for this shortcut when the RichText component is focussed, since we the global shortcut doesn't work inside the RichText component.
+  , {
+    shortcuts: {
+      'alt+mod+y': appendNewSection
+    }
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+    value: heading,
+    onChange: updateHeading,
+    tagName: tagName,
+    allowedFormats: [],
+    placeholder: "Enter heading here...",
+    className: "wp-block-a11y-day-accordion-heading"
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    id: `${attributes.id}-content`,
+    role: "region",
+    "aria-labelledby": `${attributes.id}-heading`,
+    className: "wp-block-a11y-day-accordion-panel"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    ...innerBlocksProps
+  })));
 }
 
 /***/ }),
@@ -145,10 +332,31 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @return {WPElement} Element to render.
  */
-function save() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+function save({
+  attributes
+}) {
+  const TagName = 'h' + attributes.level;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save()
-  }, 'Accordion Block – hello from the saved content!');
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(TagName, {
+    className: "wp-block-a11y-day-accordion-heading"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    type: "button",
+    "aria-expanded": "false",
+    className: "accordion-trigger",
+    "aria-controls": `${attributes.id}-content`,
+    id: `${attributes.id}-heading`,
+    dangerouslySetInnerHTML: {
+      __html: attributes.heading
+    }
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    id: `${attributes.id}-content`,
+    role: "region",
+    "aria-labelledby": `${attributes.id}-heading`,
+    className: "wp-block-a11y-day-accordion-panel"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useInnerBlocksProps.save()
+  })));
 }
 
 /***/ }),
@@ -197,6 +405,26 @@ module.exports = window["wp"]["blocks"];
 
 /***/ }),
 
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ (function(module) {
+
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/***/ (function(module) {
+
+module.exports = window["wp"]["data"];
+
+/***/ }),
+
 /***/ "@wordpress/element":
 /*!*********************************!*\
   !*** external ["wp","element"] ***!
@@ -217,13 +445,23 @@ module.exports = window["wp"]["i18n"];
 
 /***/ }),
 
+/***/ "@wordpress/primitives":
+/*!************************************!*\
+  !*** external ["wp","primitives"] ***!
+  \************************************/
+/***/ (function(module) {
+
+module.exports = window["wp"]["primitives"];
+
+/***/ }),
+
 /***/ "./src/accordion-inner/block.json":
 /*!****************************************!*\
   !*** ./src/accordion-inner/block.json ***!
   \****************************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"a11y-day/accordion-inner-block","version":"0.1.0","title":"Accordion Inner Block","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"parent":["a11y-day/accordion-block"],"supports":{"html":false},"textdomain":"accordion-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"a11y-day/accordion-inner-block","version":"0.1.0","title":"Accordion Section","category":"widgets","icon":"arrow-right","description":"Accordion heading and panel.","example":{},"parent":["a11y-day/accordion-block"],"supports":{"html":false},"attributes":{"heading":{"type":"string","selector":"wp-block-a11y-day-accordion-heading"},"level":{"type":"number","default":3},"id":{"type":"string","default":""}},"usesContext":["a11yDay/level"],"textdomain":"accordion-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 
@@ -382,7 +620,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkaccordion_block"] = self["webpackChunkaccordion_block"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunka11y_day_accordion_block"] = self["webpackChunka11y_day_accordion_block"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	}();
