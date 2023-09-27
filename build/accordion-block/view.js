@@ -3,16 +3,18 @@ var __webpack_exports__ = {};
 /*!*************************************!*\
   !*** ./src/accordion-block/view.js ***!
   \*************************************/
-const accordionContainers = document.querySelectorAll('.wp-block-a11y-day-accordion-block');
-accordionContainers.forEach(accordionContainer => {
-  const accordions = accordionContainer.querySelectorAll(':scope > .wp-block-a11y-day-accordion-inner-block');
-  // Add event listeners to all accordions and toggle them on click
-  accordions.forEach(accordion => {
-    const {
-      accordionHeader,
-      accordionContent
-    } = accordionParts(accordion);
-    accordionHeader.addEventListener('click', () => toggleAccordionItem(accordionHeader, accordionContent, accordion, accordions));
+document.addEventListener('DOMContentLoaded', () => {
+  const accordionContainers = document.querySelectorAll('.wp-block-a11y-day-accordion-block');
+  accordionContainers.forEach(accordionContainer => {
+    const accordions = accordionContainer.querySelectorAll(':scope > .wp-block-a11y-day-accordion-inner-block');
+    // Add event listeners to all accordions and toggle them on click
+    accordions.forEach(accordion => {
+      const {
+        accordionHeader,
+        accordionContent
+      } = accordionParts(accordion);
+      accordionHeader.addEventListener('click', () => toggleAccordionItem(accordionHeader, accordionContent, accordion, accordions));
+    });
   });
 });
 
