@@ -123,6 +123,18 @@
 .reveal p {
   max-width: 45ch;
 }
+.reveal .equal-cols > * {
+  width: 50%;
+}
+.reveal .equal-cols figure {
+  margin: 0;
+}
+.reveal .equal-cols figure figcaption {
+  font-size: var(--small-size);
+  font-style: italic;
+  margin-top: -0.5em;
+  text-align: center;
+}
 
 .checkmark, .reveal ul.checkmark-list li {
   position: relative;
