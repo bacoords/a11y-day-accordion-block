@@ -25,7 +25,7 @@
   --r-heading-font: "DM Serif Display", serif;
   --r-heading-color: var(--foreground);
   --r-heading1-size: clamp(2.49rem, calc(2.03rem + 2.31vw), 3.82rem);
-  --r-heading2-size: clamp(2.07rem, calc(1.73rem + 1.7vw), 3.05rem);
+  --r-heading2-size: clamp(2.01rem, calc(1.6rem + 1.7vw), 3rem);
   --r-heading3-size: clamp(1.73rem, calc(1.48rem + 1.24vw), 2.44rem);
   --r-heading4-size: clamp(1.44rem, calc(1.26rem + 0.89vw), 1.95rem);
   --small-size: clamp(0.83rem, calc(0.78rem + 0.29vw), 1rem);
@@ -61,6 +61,10 @@
   display: flex;
   align-items: start;
   gap: 1rem;
+  margin-top: 1rem;
+}
+.reveal .flex h2 {
+  margin: 0;
 }
 .reveal .authors {
   margin-top: 5rem;
