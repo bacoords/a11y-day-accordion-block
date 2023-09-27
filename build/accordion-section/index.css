@@ -7,23 +7,23 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading {
+.wp-block-a11y-day-accordion-section .wp-block-a11y-day-accordion-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.1em;
 }
-.wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading [data-rich-text-placeholder] {
+.wp-block-a11y-day-accordion-section .wp-block-a11y-day-accordion-heading [data-rich-text-placeholder] {
   width: 100%;
 }
-.wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading::after {
+.wp-block-a11y-day-accordion-section .wp-block-a11y-day-accordion-heading::after {
   content: "▶";
   font-size: 0.25em;
   transition: all 300ms ease;
   display: inline-block;
   margin-right: 0.5em;
 }
-.wp-block-a11y-day-accordion-inner-block.is-selected .wp-block-a11y-day-accordion-heading::after {
+.wp-block-a11y-day-accordion-section.is-selected .wp-block-a11y-day-accordion-heading::after {
   transform: rotate(90deg);
 }
 

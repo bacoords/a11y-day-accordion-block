@@ -8,12 +8,12 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading {
+.wp-block-a11y-day-accordion-section .wp-block-a11y-day-accordion-heading {
   background-color: var(--wp--preset--color--black);
   color: var(--wp--preset--color--white);
   margin: 0;
 }
-.wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading button {
+.wp-block-a11y-day-accordion-section .wp-block-a11y-day-accordion-heading button {
   background-color: transparent;
   border: 0;
   border-radius: 0;
@@ -29,22 +29,22 @@
   align-items: center;
   padding: 0.1em;
 }
-.wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading button::after {
+.wp-block-a11y-day-accordion-section .wp-block-a11y-day-accordion-heading button::after {
   content: "▶";
   font-size: 0.25em;
   transition: all 300ms ease;
   display: inline-block;
   margin-right: 0.5em;
 }
-.wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-heading button[aria-expanded=true]::after {
+.wp-block-a11y-day-accordion-section .wp-block-a11y-day-accordion-heading button[aria-expanded=true]::after {
   transform: rotate(90deg);
 }
-.wp-block-a11y-day-accordion-inner-block .wp-block-a11y-day-accordion-panel {
+.wp-block-a11y-day-accordion-section .wp-block-a11y-day-accordion-panel {
   padding: calc(var(--wp--style--block-gap) / 2);
   display: none;
   transition: opacity 0.3s ease-in;
 }
-.wp-block-a11y-day-accordion-inner-block.is-selected > .wp-block-a11y-day-accordion-panel, .wp-block-a11y-day-accordion-inner-block.has-child-selected > .wp-block-a11y-day-accordion-panel {
+.wp-block-a11y-day-accordion-section.is-selected > .wp-block-a11y-day-accordion-panel, .wp-block-a11y-day-accordion-section.has-child-selected > .wp-block-a11y-day-accordion-panel {
   display: block;
 }
 
