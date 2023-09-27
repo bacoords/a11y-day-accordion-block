@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "a11y-day/accordion-inner-block",
+	"name": "a11y-day/accordion-section",
 	"version": "0.1.0",
 	"title": "Accordion Section",
 	"category": "widgets",

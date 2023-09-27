@@ -49,7 +49,7 @@
 					<p>I operate independently of any other details element on the page.</p>
 				</details>
 			</section>
-			<section class="feature-slide">
+			<section class="feature-slide" data-background-color="#a1c69f">
 				<h1>The Accessible Accordion Rubric</h1>
 				<p>There are 4 main criteria for an accessible accordion.</p>
 			</section>
@@ -241,52 +241,65 @@
 			</section>
 			<section>
 				<h1>Registering the parent block</h1>
-				<code class="screen-reader-only">
-					{
-						// partial view of the block.json
-						&#x22;name&#x22;: &#x22;a11y-day/accordion-block&#x22;,
-						&#x22;title&#x22;: &#x22;Accordion&#x22;,
-						&#x22;attributes&#x22;: {
-						  &#x22;level&#x22;: {
-							&#x22;type&#x22;: &#x22;number&#x22;,
-							&#x22;default&#x22;: 3
+				<div class="flex">
+					<div style="width: 50%;">				<code class="screen-reader-only">
+						{
+							// partial view of the block.json
+							&#x22;name&#x22;: &#x22;a11y-day/accordion-block&#x22;,
+							&#x22;title&#x22;: &#x22;Accordion&#x22;,
+							&#x22;attributes&#x22;: {
+							  &#x22;level&#x22;: {
+								&#x22;type&#x22;: &#x22;number&#x22;,
+								&#x22;default&#x22;: 3
+							  }
+							},
+							&#x22;providesContext&#x22;: {
+							  &#x22;a11yDay/level&#x22;: &#x22;level&#x22;
+							}
 						  }
-						},
-						&#x22;providesContext&#x22;: {
-						  &#x22;a11yDay/level&#x22;: &#x22;level&#x22;
-						}
-					  }
-				</code>
-				<img src="assets/parent-block-json.png" alt="parent block json partial view" style="max-width:40vh">
+					</code>
+					<img src="assets/parent-block-json.png" alt="parent block json partial view" style="max-width:30vh"></div>
+					<div style="width: 50%;"><img style="max-width:35vh" class="" src="assets/parent-block-edit.png" alt="the edit function of the accordion parent block"></div>
+				</div>
+
 			</section>
 			<section>
 				<h1>Registering the child block</h1>
-				<code class="screen-reader-only">
-					{
-						// partial view of the block.json
-						&#x22;name&#x22;: &#x22;a11y-day/accordion-inner-block&#x22;,
-						&#x22;title&#x22;: &#x22;Accordion Section&#x22;,
-						&#x22;parent&#x22;: [ &#x22;a11y-day/accordion-block&#x22; ],
-						&#x22;attributes&#x22;: {
-						  &#x22;heading&#x22;: {
-							&#x22;type&#x22;: &#x22;string&#x22;,
-							&#x22;selector&#x22;: &#x22;wp-block-a11y-day-accordion-heading&#x22;
-						  },
-						  &#x22;level&#x22;: {
-							&#x22;type&#x22;: &#x22;number&#x22;,
-							&#x22;default&#x22;: 3
-						  },
-						  &#x22;id&#x22;: {
-							&#x22;type&#x22;: &#x22;string&#x22;,
-							&#x22;default&#x22;: &#x22;&#x22;
-						  }
-						},
-						&#x22;usesContext&#x22;: [ &#x22;a11yDay/level&#x22; ]
-					  }
-				</code>
-				<img src="assets/child-block-json.png" alt="child block json partial view" style="max-width:40vh">
+				<div class="flex">
+					<div style="width: 50%;">
+						<code class="screen-reader-only">
+							{
+								// partial view of the block.json
+								&#x22;name&#x22;: &#x22;a11y-day/accordion-inner-block&#x22;,
+								&#x22;title&#x22;: &#x22;Accordion Section&#x22;,
+								&#x22;parent&#x22;: [ &#x22;a11y-day/accordion-block&#x22; ],
+								&#x22;attributes&#x22;: {
+								  &#x22;heading&#x22;: {
+									&#x22;type&#x22;: &#x22;string&#x22;,
+									&#x22;selector&#x22;: &#x22;wp-block-a11y-day-accordion-heading&#x22;
+								  },
+								  &#x22;level&#x22;: {
+									&#x22;type&#x22;: &#x22;number&#x22;,
+									&#x22;default&#x22;: 3
+								  },
+								  &#x22;id&#x22;: {
+									&#x22;type&#x22;: &#x22;string&#x22;,
+									&#x22;default&#x22;: &#x22;&#x22;
+								  }
+								},
+								&#x22;usesContext&#x22;: [ &#x22;a11yDay/level&#x22; ]
+							  }
+						</code>
+						<img src="assets/child-block-json.png" alt="child block json partial view" style="max-width:30vh">
+					</div>
+					<div style="width: 50%;">
+						<img src="assets/child-block-edit.png" alt="the return function of the accordion section child block"
+					style="max-width:35vh">
+					</div>
+				</div>
+
 			</section>
-			<section data-transition="slide-in none">
+			<!-- <section data-transition="slide-in none">
 				<h1>InnerBlocks inside InnerBlocks</h1>
 				<p>The parent block:</p>
 				<img class="" src="assets/parent-block-edit.png" alt="the edit function of the accordion parent block">
@@ -298,7 +311,7 @@
 				<p>The child block:</p>
 				<img src="assets/child-block-edit.png" alt="the return function of the accordion section child block"
 					style="max-width:38vh">
-			</section>
+			</section> -->
 			<section>
 				<h1>Editor Accessibility Tweaks</h1>
 

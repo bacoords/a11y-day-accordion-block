@@ -22,6 +22,6 @@
  */
 function a11y_day_accordion_block_block_init() {
 	register_block_type( __DIR__ . '/build/accordion-block' );
-	register_block_type( __DIR__ . '/build/accordion-inner' );
+	register_block_type( __DIR__ . '/build/accordion-section' );
 }
 add_action( 'init', 'a11y_day_accordion_block_block_init' );
