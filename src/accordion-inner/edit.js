@@ -21,6 +21,9 @@ import {
 } from '@wordpress/block-editor';
 import { useEffect, useState } from '@wordpress/element';
 import { useSelect, useDispatch } from '@wordpress/data';
+import { ToolbarGroup, ToolbarButton, KeyboardShortcuts } from '@wordpress/components';
+import { getBlockType, createBlock } from '@wordpress/blocks';
+import { plus } from '@wordpress/icons';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -44,6 +47,7 @@ export default function Edit( {
 	clientId,
 	isSelected,
 	context,
+	name
 } ) {
 	// Set up our block props and innerblocks props.
 	const blockProps = useBlockProps();
@@ -117,14 +121,63 @@ export default function Edit( {
 		updateLevelLocal( context[ 'a11yDay/level' ] );
 	}, [ context[ 'a11yDay/level' ] ] );
 
+	const { parentBlockType, firstParentClientId } = useSelect( ( select ) => {
+		const { getBlockName, getBlockParents, getSelectedBlockClientId } =
+			select( blockEditorStore );
+		const selectedBlockClientId = getSelectedBlockClientId();
+		const parents = getBlockParents( selectedBlockClientId );
+		const _firstParentClientId = parents[ parents.length - 1 ];
+		const parentBlockName = getBlockName( _firstParentClientId );
+		const _parentBlockType = getBlockType( parentBlockName );
+		return {
+			parentBlockType: _parentBlockType,
+			firstParentClientId: _firstParentClientId,
+		};
+	}, [] );
+
+	const { insertBlock } = useDispatch( 'core/block-editor' );
+	const { parentinnerBlocks } = useSelect( ( select ) => ( {
+		parentinnerBlocks:
+			select( 'core/block-editor' ).getBlocks( firstParentClientId ),
+	} ) );
+
+	function getCurrentBlockPosition( block ) {
+		return block.clientId === clientId;
+	}
+	const appendNewSection = () => {
+		const block = createBlock( name );
+		insertBlock(
+			block,
+			parentinnerBlocks.findIndex( getCurrentBlockPosition ) + 1,
+			firstParentClientId
+		);
+	};
+
 	return (
 		<div { ...blockProps }>
 			<BlockControls>
-				<HeadingLevelDropdown
-					value={ level }
-					onChange={ updateLevel }
-				/>
+				<ToolbarGroup>
+					<HeadingLevelDropdown
+						value={ level }
+						onChange={ updateLevel }
+					/>
+				</ToolbarGroup>
+				<ToolbarGroup>
+					<ToolbarButton
+						onClick={ appendNewSection }
+						icon={ plus }
+						label={ __(
+							'Append a new accordion section ( ⌥/Alt + ⌘/Ctrl + Y )',
+							'superlist-block'
+						) }
+					/>
+				</ToolbarGroup>
 			</BlockControls>
+			<KeyboardShortcuts
+                shortcuts={ {
+                    'alt+mod+y': appendNewSection,
+                } }
+            >
 			<RichText
 				value={ heading }
 				onChange={ updateHeading }
@@ -132,8 +185,8 @@ export default function Edit( {
 				allowedFormats={ [ 'core/bold', 'core/italic' ] }
 				placeholder="Enter heading here..."
 				className="wp-block-a11y-day-accordion-heading"
-				tabIndex="0"
-			/>
+				/>
+			</KeyboardShortcuts>
 			<div
 				id={ `${ attributes.id }-content` }
 				role="region"
