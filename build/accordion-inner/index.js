@@ -94,7 +94,6 @@ function Edit({
   attributes,
   setAttributes,
   clientId,
-  isSelected,
   context,
   name
 }) {

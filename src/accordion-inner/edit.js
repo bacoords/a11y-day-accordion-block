@@ -22,7 +22,7 @@ import {
 import { useEffect, useState } from '@wordpress/element';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { ToolbarGroup, ToolbarButton, KeyboardShortcuts } from '@wordpress/components';
-import { getBlockType, createBlock } from '@wordpress/blocks';
+import { createBlock } from '@wordpress/blocks';
 import { plus } from '@wordpress/icons';
 
 /**
@@ -45,7 +45,6 @@ export default function Edit( {
 	attributes,
 	setAttributes,
 	clientId,
-	isSelected,
 	context,
 	name
 } ) {
